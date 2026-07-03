@@ -637,6 +637,8 @@ export const insightsConfig: InsightsConfig = {
 
 // Contact page configuration
 export interface ContactConfig {
+  /** Web3Forms access key — form submissions are emailed to the address registered with this key. */
+  web3formsKey: string;
   label: string;
   heading: string;
   description: string;
@@ -659,6 +661,7 @@ export interface ContactConfig {
 }
 
 export const contactConfig: ContactConfig = {
+  web3formsKey: "", // paste Web3Forms access key here
   label: "Contact",
   heading: "Let's Discuss Your Growth Goals",
   description: "Ready to improve your business performance? Book a consultation with our team. We'll explore your challenges, identify opportunities, and outline how we can help.",
