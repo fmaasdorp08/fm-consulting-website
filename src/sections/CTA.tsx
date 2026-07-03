@@ -1,4 +1,5 @@
 import { } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { AnimatedButton } from '@/components/AnimatedButton';
@@ -81,15 +82,16 @@ export function CTA() {
           >
             {ctaConfig.buttonText && (
               <Magnetic strength={0.3}>
-                <AnimatedButton
-                  href={ctaConfig.buttonHref}
-                  variant="primary"
-                  size="lg"
-                  showIcon
-                  className="bg-white text-exvia-black hover:bg-white/90"
-                >
-                  {ctaConfig.buttonText}
-                </AnimatedButton>
+                <Link to={ctaConfig.buttonHref}>
+                  <AnimatedButton
+                    variant="primary"
+                    size="lg"
+                    showIcon
+                    className="bg-white text-exvia-black hover:bg-white/90"
+                  >
+                    {ctaConfig.buttonText}
+                  </AnimatedButton>
+                </Link>
               </Magnetic>
             )}
 

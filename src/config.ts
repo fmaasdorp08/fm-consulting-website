@@ -357,11 +357,10 @@ export const footerConfig: FooterConfig = {
     {
       title: "Resources",
       links: [
-        { label: "Case Studies", href: "#" },
-        { label: "Growth Framework", href: "#" },
-        { label: "FAQ", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Terms of Service", href: "#" },
+        { label: "Client Success", href: "/industries" },
+        { label: "Growth Framework", href: "/why-fm" },
+        { label: "Insights", href: "/insights" },
+        { label: "Book a Consultation", href: "/contact" },
       ],
     },
   ],
@@ -668,7 +667,7 @@ export const contactConfig: ContactConfig = {
   formIntro: "Fill out the form below and we'll respond within 24 hours.",
   contactInfo: {
     email: "fmaasdorp@outlook.com",
-    phone: "+27 21 555 0123",
+    phone: "+27 62 897 6939",
     address: "Cape Town, South Africa",
     hours: "Monday - Friday: 08:00 - 17:00 SAST",
   },
