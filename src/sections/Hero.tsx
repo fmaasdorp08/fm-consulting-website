@@ -1,6 +1,9 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { heroConfig } from '@/config';
+import { AnimatedButton } from '@/components/AnimatedButton';
+import { Magnetic } from '@/components/motion/Magnetic';
 
 const boxSize = 450;
 const halfBox = boxSize / 2;
@@ -34,7 +37,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full min-h-screen overflow-hidden bg-neutral-900 cursor-none"
+      className="relative w-full min-h-screen overflow-hidden bg-neutral-900"
       onMouseMove={handleMouseMove}
       style={{ '--mouse-x': 'calc(42vw - 200px)', '--mouse-y': 'calc(28vh - 200px)' } as React.CSSProperties}
     >
@@ -47,9 +50,9 @@ export function Hero() {
       >
         <img
           src={heroConfig.backgroundImage}
-          alt="Hero Background"
+          alt=""
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'blur(15px) brightness(0.7)' }}
+          style={{ filter: 'blur(15px) brightness(0.55)' }}
           onLoad={() => setImageLoaded(true)}
         />
       </div>
@@ -57,7 +60,7 @@ export function Hero() {
       {/* Sharp Image Container - uses CSS variables for position */}
       <div
         className={cn(
-          'absolute top-0 left-0 overflow-hidden pointer-events-none z-20',
+          'hero-lens-drift absolute top-0 left-0 overflow-hidden pointer-events-none z-20',
           isLoaded && imageLoaded ? 'opacity-100' : 'opacity-0'
         )}
         style={{
@@ -79,8 +82,9 @@ export function Hero() {
         >
           <img
             src={heroConfig.backgroundImage}
-            alt="Hero Sharp"
+            alt=""
             className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.85)' }}
           />
         </div>
       </div>
@@ -88,7 +92,7 @@ export function Hero() {
       {/* Square border frame */}
       <div
         className={cn(
-          'absolute top-0 left-0 pointer-events-none z-20',
+          'hero-lens-drift absolute top-0 left-0 pointer-events-none z-20',
           isLoaded && imageLoaded ? 'opacity-100' : 'opacity-0'
         )}
         style={{
@@ -110,12 +114,12 @@ export function Hero() {
       {heroConfig.roles[0] && (
         <div
           className={cn(
-            'absolute left-8 lg:left-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-[1200ms] ease-out-quart',
+            'hidden md:block absolute left-8 lg:left-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-[1200ms] ease-out-quart',
             isLoaded ? 'opacity-100' : 'opacity-0'
           )}
           style={{ transitionDelay: '800ms' }}
         >
-          <span className="text-xs font-geist-mono uppercase tracking-[0.3em] text-white/70">
+          <span className="text-xs font-geist-mono uppercase tracking-[0.3em] text-white/70 [writing-mode:vertical-rl]">
             {heroConfig.roles[0]}
           </span>
         </div>
@@ -123,23 +127,74 @@ export function Hero() {
       {heroConfig.roles[1] && (
         <div
           className={cn(
-            'absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-[1200ms] ease-out-quart',
+            'hidden md:block absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-[1200ms] ease-out-quart',
             isLoaded ? 'opacity-100' : 'opacity-0'
           )}
           style={{ transitionDelay: '900ms' }}
         >
-          <span className="text-xs font-geist-mono uppercase tracking-[0.3em] text-white/70">
+          <span className="text-xs font-geist-mono uppercase tracking-[0.3em] text-white/70 [writing-mode:vertical-rl]">
             {heroConfig.roles[1]}
           </span>
         </div>
       )}
 
       {/* Content Container */}
-      <div className="relative z-30 flex flex-col items-center justify-end min-h-screen px-6 lg:px-12 pointer-events-none">
+      <div className="relative z-30 flex flex-col items-center justify-end min-h-screen px-6 lg:px-12 pb-10 md:pb-14">
+        {/* Headline + subheadline */}
+        {heroConfig.headline && (
+          <div
+            className={cn(
+              'max-w-3xl text-center transition-all duration-[1200ms] ease-out-quart mb-8',
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            )}
+            style={{ transitionDelay: '1000ms' }}
+          >
+            <p className="text-lg md:text-xl text-white/90 leading-snug font-medium">
+              {heroConfig.headline}
+            </p>
+            {heroConfig.subheadline && (
+              <p className="mt-4 text-sm md:text-base text-white/60 leading-relaxed max-w-2xl mx-auto">
+                {heroConfig.subheadline}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* CTAs */}
+        {(heroConfig.primaryCta || heroConfig.secondaryCta) && (
+          <div
+            className={cn(
+              'flex flex-col sm:flex-row items-center gap-4 mb-12 transition-all duration-[1200ms] ease-out-quart',
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            )}
+            style={{ transitionDelay: '1150ms' }}
+          >
+            {heroConfig.primaryCta && (
+              <Magnetic>
+                <Link to="/contact">
+                  <AnimatedButton variant="outline-white" size="lg" showIcon>
+                    {heroConfig.primaryCta}
+                  </AnimatedButton>
+                </Link>
+              </Magnetic>
+            )}
+            {heroConfig.secondaryCta && (
+              <Magnetic>
+                <Link
+                  to="/services"
+                  className="text-sm font-geist-mono uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors duration-300 border-b border-white/30 hover:border-white pb-1"
+                >
+                  {heroConfig.secondaryCta}
+                </Link>
+              </Magnetic>
+            )}
+          </div>
+        )}
+
         {/* Main Heading - large and impactful */}
         <div
           className={cn(
-            'text-center transition-all duration-[1200ms] ease-out-quart pb-8 md:pb-12',
+            'text-center transition-all duration-[1200ms] ease-out-quart',
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           )}
           style={{ transitionDelay: '600ms' }}
@@ -147,6 +202,17 @@ export function Hero() {
           <h1 className="text-[clamp(3rem,12vw,12rem)] font-black text-white tracking-[-0.04em] leading-[0.85]">
             {heroConfig.name}
           </h1>
+        </div>
+
+        {/* Scroll cue */}
+        <div
+          className={cn(
+            'absolute bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-1000 hidden md:block',
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          )}
+          style={{ transitionDelay: '1600ms' }}
+        >
+          <div className="w-px h-8 bg-white/40 animate-scroll-cue" />
         </div>
       </div>
     </section>

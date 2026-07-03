@@ -4,6 +4,9 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { AnimatedButton } from '@/components/AnimatedButton';
 import { ArrowRight, Mail } from 'lucide-react';
 import { ctaConfig } from '@/config';
+import { ParallaxImage } from '@/components/motion/ParallaxImage';
+import { Magnetic } from '@/components/motion/Magnetic';
+import { TextReveal } from '@/components/motion/Reveal';
 
 export function CTA() {
   if (!ctaConfig.heading && !ctaConfig.description) return null;
@@ -14,10 +17,11 @@ export function CTA() {
     <section id="contact" className="relative w-full py-32 lg:py-48 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <ParallaxImage
           src={ctaConfig.backgroundImage}
-          alt="Background"
-          className="w-full h-full object-cover"
+          alt=""
+          className="w-full h-full"
+          intensity={0.18}
         />
         <div className="absolute inset-0 bg-exvia-black/60" />
       </div>
@@ -50,7 +54,7 @@ export function CTA() {
               )}
               style={{ transitionDelay: '100ms' }}
             >
-              {ctaConfig.heading}
+              <TextReveal text={ctaConfig.heading} />
             </h2>
           )}
 
@@ -76,15 +80,17 @@ export function CTA() {
             style={{ transitionDelay: '300ms' }}
           >
             {ctaConfig.buttonText && (
-              <AnimatedButton
-                href={ctaConfig.buttonHref}
-                variant="primary"
-                size="lg"
-                showIcon
-                className="bg-white text-exvia-black hover:bg-white/90"
-              >
-                {ctaConfig.buttonText}
-              </AnimatedButton>
+              <Magnetic strength={0.3}>
+                <AnimatedButton
+                  href={ctaConfig.buttonHref}
+                  variant="primary"
+                  size="lg"
+                  showIcon
+                  className="bg-white text-exvia-black hover:bg-white/90"
+                >
+                  {ctaConfig.buttonText}
+                </AnimatedButton>
+              </Magnetic>
             )}
 
             {ctaConfig.email && (

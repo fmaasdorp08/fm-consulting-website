@@ -2,31 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Geist Font Faces */
-@font-face {
-  font-family: 'Geist';
-  src: url('https://cdn.prod.website-files.com/68befb9aa58b429a9ce06d7f/68bf1778983b9c9184da501f_Geist-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Geist';
-  src: url('https://cdn.prod.website-files.com/68befb9aa58b429a9ce06d7f/68bf1778794a69efb67a03b9_Geist-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'GeistMono';
-  src: url('https://cdn.prod.website-files.com/68befb9aa58b429a9ce06d7f/68bf17d1bd4c1ee371204d67_GeistMono-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer base {
   :root {
     /* Exvia Design System Colors */
@@ -96,7 +71,7 @@
   }
   
   .font-geist-mono {
-    font-family: 'GeistMono', 'Courier New', monospace;
+    font-family: 'Geist Mono', 'Courier New', monospace;
   }
   
   .text-h1 {
@@ -381,5 +356,137 @@
   
   .text-h3 {
     font-size: 1.75rem;
+  }
+}
+
+/* ============ Experience Elevation Layer ============ */
+
+/* Custom cursor */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--exvia-black);
+  mix-blend-mode: difference;
+  background: #fff;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #fff;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease;
+}
+
+/* Film grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  pointer-events: none;
+  z-index: 9980;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 8s steps(10) infinite;
+}
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -8%); }
+  20% { transform: translate(-12%, 3%); }
+  30% { transform: translate(6%, -10%); }
+  40% { transform: translate(-4%, 12%); }
+  50% { transform: translate(-10%, 4%); }
+  60% { transform: translate(12%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(3%, 12%); }
+  90% { transform: translate(-8%, 8%); }
+}
+
+/* Marquee */
+.marquee-track {
+  animation: marquee-scroll linear infinite;
+  animation-duration: inherit;
+}
+
+.marquee-pausable:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Hero scroll cue */
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
+
+.animate-scroll-cue {
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+/* Hero lens drift for touch devices (no mouse to follow) */
+@keyframes lens-drift {
+  0%, 100% { transform: translate3d(8vw, 12vh, 0); }
+  25% { transform: translate3d(40vw, 20vh, 0); }
+  50% { transform: translate3d(30vw, 42vh, 0); }
+  75% { transform: translate3d(12vw, 30vh, 0); }
+}
+
+@media (pointer: coarse) {
+  .hero-lens-drift {
+    animation: lens-drift 24s ease-in-out infinite;
+  }
+}
+
+/* Reduced motion: kill all decorative animation */
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay,
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+  }
+
+  .animate-scroll-cue,
+  .hero-lens-drift {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

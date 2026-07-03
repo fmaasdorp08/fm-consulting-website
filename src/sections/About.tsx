@@ -2,6 +2,7 @@ import { } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { aboutConfig } from '@/config';
+import { Counter } from '@/components/motion/Counter';
 
 export function About() {
   if (!aboutConfig.description && aboutConfig.stats.length === 0 && aboutConfig.images.length === 0) return null;
@@ -54,7 +55,7 @@ export function About() {
                 style={{ transitionDelay: '200ms' }}
               >
                 <span className="text-7xl lg:text-8xl font-black text-exvia-black leading-none">
-                  {aboutConfig.experienceValue}
+                  <Counter value={aboutConfig.experienceValue} />
                 </span>
                 {aboutConfig.experienceLabel && (
                   <span className="text-sm text-exvia-black/60 pb-3">
@@ -75,7 +76,7 @@ export function About() {
               >
                 {aboutConfig.stats.map((stat, index) => (
                   <div key={index}>
-                    <span className="block text-3xl font-semibold text-exvia-black">{stat.value}</span>
+                    <span className="block text-3xl font-semibold text-exvia-black"><Counter value={stat.value} /></span>
                     <span className="text-sm text-exvia-black/60">{stat.label}</span>
                   </div>
                 ))}
