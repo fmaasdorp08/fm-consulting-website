@@ -98,9 +98,10 @@ export function About() {
                 >
                   <div className="aspect-[4/5] relative group cursor-pointer">
                     <img
+                      loading="lazy"
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
+                      className="grade-img w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-exvia-black/0 group-hover:bg-exvia-black/10 transition-colors duration-300" />
                   </div>

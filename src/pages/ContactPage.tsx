@@ -20,8 +20,24 @@ export function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const subject = encodeURIComponent(
+      `Consultation Request — ${formData.name}${formData.company ? ` (${formData.company})` : ''}`
+    );
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Company: ${formData.company}`,
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone}`,
+        `Service Required: ${formData.service}`,
+        `Budget Range: ${formData.budget}`,
+        '',
+        'Message:',
+        formData.message,
+      ].join('\n')
+    );
+    window.location.href = `mailto:${contactConfig.contactInfo.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
-    // In a real implementation, this would send the form data to a server
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

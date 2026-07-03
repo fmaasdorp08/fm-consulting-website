@@ -20,6 +20,7 @@ function ProjectCard({ project, index, isVisible }: { project: { title: string; 
         <ParallaxImage
           src={project.image}
           alt={project.title}
+          imgClassName="grade-img"
           className={cn(
             'aspect-[4/3]',
             project.featured && 'lg:aspect-[16/9]'

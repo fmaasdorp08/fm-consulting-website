@@ -490,3 +490,19 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Editorial image grade: monochrome at rest, colour on interaction */
+.grade-img {
+  filter: grayscale(1) contrast(1.04) brightness(1.01);
+  transition: filter 0.8s var(--ease-out-quart);
+}
+
+.group:hover .grade-img {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grade-img {
+    transition: none;
+  }
+}
