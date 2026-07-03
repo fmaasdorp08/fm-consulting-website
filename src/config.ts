@@ -661,7 +661,7 @@ export interface ContactConfig {
 }
 
 export const contactConfig: ContactConfig = {
-  web3formsKey: "", // paste Web3Forms access key here
+  web3formsKey: "64aa6f02-a054-4ad0-87c6-bb0712d3b50c",
   label: "Contact",
   heading: "Let's Discuss Your Growth Goals",
   description: "Ready to improve your business performance? Book a consultation with our team. We'll explore your challenges, identify opportunities, and outline how we can help.",
