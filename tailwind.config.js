@@ -50,7 +50,7 @@ module.exports = {
       },
       fontFamily: {
         geist: ['Geist', 'Arial', 'sans-serif'],
-        'geist-mono': ['GeistMono', 'Courier New', 'monospace'],
+        'geist-mono': ['Geist Mono', 'Courier New', 'monospace'],
       },
       fontSize: {
         'h1': ['clamp(3rem, 21vw, 21vw)', { lineHeight: '1', letterSpacing: '-0.04em' }],

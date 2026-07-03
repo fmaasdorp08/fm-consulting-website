@@ -8,6 +8,8 @@ export function ContactPage() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.2 });
   const { ref: formRef, isVisible: formVisible } = useScrollAnimation({ threshold: 0.2 });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -18,10 +20,66 @@ export function ContactPage() {
     budget: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const buildMailto = () => {
+    const subject = encodeURIComponent(
+      `Consultation Request — ${formData.name}${formData.company ? ` (${formData.company})` : ''}`
+    );
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Company: ${formData.company}`,
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone}`,
+        `Service Required: ${formData.service}`,
+        `Budget Range: ${formData.budget}`,
+        '',
+        'Message:',
+        formData.message,
+      ].join('\n')
+    );
+    return `mailto:${contactConfig.contactInfo.email}?subject=${subject}&body=${body}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // In a real implementation, this would send the form data to a server
+    setError('');
+
+    // No key configured yet — fall back to the visitor's email client
+    if (!contactConfig.web3formsKey) {
+      window.location.href = buildMailto();
+      setSubmitted(true);
+      return;
+    }
+
+    setSending(true);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: contactConfig.web3formsKey,
+          subject: `Consultation Request — ${formData.name}${formData.company ? ` (${formData.company})` : ''}`,
+          from_name: 'FM Consulting Website',
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          budget: formData.budget,
+          message: formData.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setError('Something went wrong sending your message. Please email us directly instead.');
+      }
+    } catch {
+      setError('Something went wrong sending your message. Please email us directly instead.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -293,12 +351,22 @@ export function ContactPage() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-sm text-red-600">
+                        {error}{' '}
+                        <a href={buildMailto()} className="underline">
+                          Email us directly
+                        </a>
+                      </p>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-exvia-black text-white font-medium rounded-lg hover:bg-exvia-black/90 transition-colors"
+                      disabled={sending}
+                      className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-exvia-black text-white font-medium rounded-lg hover:bg-exvia-black/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       <Send className="w-4 h-4" />
-                      Send Message
+                      {sending ? 'Sending…' : 'Send Message'}
                     </button>
 
                     <p className="text-sm text-exvia-black/50 text-center">

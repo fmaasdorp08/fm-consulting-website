@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { processConfig } from '@/config';
@@ -99,13 +100,13 @@ export function Process() {
             <p className="text-exvia-black/70">
               Ready to start your growth journey?
             </p>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 bg-exvia-black text-white font-medium rounded-lg hover:bg-exvia-black/90 transition-colors"
             >
               Book a Consultation
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

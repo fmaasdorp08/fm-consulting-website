@@ -97,10 +97,10 @@ export const aboutConfig: AboutConfig = {
     { value: "85%", label: "Client\nRetention" },
   ],
   images: [
-    { src: "/images/about-1.jpg", alt: "Strategic planning session" },
-    { src: "/images/about-2.jpg", alt: "Analytics and data visualization" },
-    { src: "/images/about-3.jpg", alt: "Executive team collaboration" },
-    { src: "/images/about-4.jpg", alt: "Professional workspace" },
+    { src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80", alt: "Strategic planning session" },
+    { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80", alt: "Analytics and data visualization" },
+    { src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80", alt: "Executive team collaboration" },
+    { src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1200&q=80", alt: "Professional workspace" },
   ],
 };
 
@@ -195,32 +195,32 @@ export const portfolioConfig: PortfolioConfig = {
       title: "The Reserve Restaurant Group",
       category: "Hospitality",
       year: "2024",
-      image: "/images/portfolio-1.jpg",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80",
       featured: true,
     },
     {
       title: "Luxe Home Collections",
       category: "E-commerce",
       year: "2024",
-      image: "/images/portfolio-2.jpg",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
     },
     {
       title: "Argus Advisory Partners",
       category: "Professional Services",
       year: "2023",
-      image: "/images/portfolio-3.jpg",
+      image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
     },
     {
       title: "B2B Connect Platform",
       category: "Technology",
       year: "2023",
-      image: "/images/portfolio-4.jpg",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     },
     {
       title: "Foundry Co-Working Spaces",
       category: "SME / Founder-led",
       year: "2023",
-      image: "/images/portfolio-5.jpg",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
     },
   ],
   cta: {
@@ -257,7 +257,7 @@ export const testimonialsConfig: TestimonialsConfig = {
       author: "Sarah Mitchell",
       role: "Managing Director",
       company: "The Reserve Restaurant Group",
-      image: "/images/testimonial-1.jpg",
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
       rating: 5,
     },
     {
@@ -265,7 +265,7 @@ export const testimonialsConfig: TestimonialsConfig = {
       author: "David Nkosi",
       role: "CEO",
       company: "Argus Advisory Partners",
-      image: "/images/testimonial-2.jpg",
+      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
       rating: 5,
     },
     {
@@ -273,7 +273,7 @@ export const testimonialsConfig: TestimonialsConfig = {
       author: "Emma van der Merwe",
       role: "Founder",
       company: "Luxe Home Collections",
-      image: "/images/testimonial-3.jpg",
+      image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80",
       rating: 5,
     },
   ],
@@ -301,7 +301,7 @@ export const ctaConfig: CTAConfig = {
   description: "Book a consultation with our team. We'll discuss your business challenges, identify opportunities, and outline how FM Consulting can help you achieve measurable commercial outcomes.",
   buttonText: "Book Your Consultation",
   buttonHref: "/contact",
-  email: "hello@fmconsulting.co.za",
+  email: "fmaasdorp@outlook.com",
   backgroundImage: "/images/cta-bg.jpg",
 };
 
@@ -357,11 +357,10 @@ export const footerConfig: FooterConfig = {
     {
       title: "Resources",
       links: [
-        { label: "Case Studies", href: "#" },
-        { label: "Growth Framework", href: "#" },
-        { label: "FAQ", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Terms of Service", href: "#" },
+        { label: "Client Success", href: "/industries" },
+        { label: "Growth Framework", href: "/why-fm" },
+        { label: "Insights", href: "/insights" },
+        { label: "Book a Consultation", href: "/contact" },
       ],
     },
   ],
@@ -374,8 +373,8 @@ export const footerConfig: FooterConfig = {
   newsletterDescription: "Receive insights on growth strategy, performance marketing, and business optimisation.",
   newsletterButtonText: "Subscribe",
   newsletterPlaceholder: "Enter your email",
-  copyright: "© 2024 FM Consulting Pty Ltd. All rights reserved.",
-  credit: "Registered in South Africa. Reg. No. 2018/123456/07",
+  copyright: "© 2026 FM Consulting Pty Ltd. All rights reserved.",
+  credit: "",
 };
 
 // Industries page configuration
@@ -637,6 +636,8 @@ export const insightsConfig: InsightsConfig = {
 
 // Contact page configuration
 export interface ContactConfig {
+  /** Web3Forms access key — form submissions are emailed to the address registered with this key. */
+  web3formsKey: string;
   label: string;
   heading: string;
   description: string;
@@ -659,13 +660,14 @@ export interface ContactConfig {
 }
 
 export const contactConfig: ContactConfig = {
+  web3formsKey: "64aa6f02-a054-4ad0-87c6-bb0712d3b50c",
   label: "Contact",
   heading: "Let's Discuss Your Growth Goals",
   description: "Ready to improve your business performance? Book a consultation with our team. We'll explore your challenges, identify opportunities, and outline how we can help.",
   formIntro: "Fill out the form below and we'll respond within 24 hours.",
   contactInfo: {
-    email: "hello@fmconsulting.co.za",
-    phone: "+27 21 555 0123",
+    email: "fmaasdorp@outlook.com",
+    phone: "+27 62 897 6939",
     address: "Cape Town, South Africa",
     hours: "Monday - Friday: 08:00 - 17:00 SAST",
   },

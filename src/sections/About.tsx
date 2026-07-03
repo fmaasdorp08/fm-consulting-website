@@ -2,6 +2,7 @@ import { } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { aboutConfig } from '@/config';
+import { Counter } from '@/components/motion/Counter';
 
 export function About() {
   if (!aboutConfig.description && aboutConfig.stats.length === 0 && aboutConfig.images.length === 0) return null;
@@ -54,7 +55,7 @@ export function About() {
                 style={{ transitionDelay: '200ms' }}
               >
                 <span className="text-7xl lg:text-8xl font-black text-exvia-black leading-none">
-                  {aboutConfig.experienceValue}
+                  <Counter value={aboutConfig.experienceValue} />
                 </span>
                 {aboutConfig.experienceLabel && (
                   <span className="text-sm text-exvia-black/60 pb-3">
@@ -75,7 +76,7 @@ export function About() {
               >
                 {aboutConfig.stats.map((stat, index) => (
                   <div key={index}>
-                    <span className="block text-3xl font-semibold text-exvia-black">{stat.value}</span>
+                    <span className="block text-3xl font-semibold text-exvia-black"><Counter value={stat.value} /></span>
                     <span className="text-sm text-exvia-black/60">{stat.label}</span>
                   </div>
                 ))}
@@ -97,9 +98,10 @@ export function About() {
                 >
                   <div className="aspect-[4/5] relative group cursor-pointer">
                     <img
+                      loading="lazy"
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
+                      className="grade-img w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-exvia-black/0 group-hover:bg-exvia-black/10 transition-colors duration-300" />
                   </div>
