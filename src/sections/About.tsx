@@ -1,14 +1,13 @@
-import { } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { aboutConfig } from '@/config';
 import { Counter } from '@/components/motion/Counter';
 
 export function About() {
-  if (!aboutConfig.description && aboutConfig.stats.length === 0 && aboutConfig.images.length === 0) return null;
-
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.2 });
   const { containerRef: imagesRef, visibleItems } = useStaggerAnimation(aboutConfig.images.length || 4, 150);
+
+  if (!aboutConfig.description && aboutConfig.stats.length === 0 && aboutConfig.images.length === 0) return null;
 
   return (
     <section id="about" className="w-full py-24 lg:py-32 bg-white">

@@ -1,22 +1,22 @@
-import { useState, type ElementType } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useServiceParallax } from '@/hooks/useMouseParallax';
 import { servicesConfig } from '@/config';
 import { TrendingUp, Target, Users, RefreshCw, BarChart3, Settings, Circle } from 'lucide-react';
 
-const iconMap: Record<string, ElementType> = {
-  TrendingUp,
-  Target,
-  Users,
-  RefreshCw,
-  BarChart3,
-  Settings,
-  Circle,
-};
+function ServiceIcon({ iconName }: { iconName: string }) {
+  const iconClassName = 'w-5 h-5 text-exvia-black';
 
-function getIcon(iconName: string): ElementType {
-  return iconMap[iconName] || Circle;
+  switch (iconName) {
+    case 'TrendingUp': return <TrendingUp className={iconClassName} />;
+    case 'Target': return <Target className={iconClassName} />;
+    case 'Users': return <Users className={iconClassName} />;
+    case 'RefreshCw': return <RefreshCw className={iconClassName} />;
+    case 'BarChart3': return <BarChart3 className={iconClassName} />;
+    case 'Settings': return <Settings className={iconClassName} />;
+    default: return <Circle className={iconClassName} />;
+  }
 }
 
 interface ServiceCardProps {
@@ -27,7 +27,6 @@ interface ServiceCardProps {
 function ServiceCard({ service, index }: ServiceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { containerRef, getTransform } = useServiceParallax();
-  const Icon = getIcon(service.iconName);
 
   return (
     <div
@@ -43,7 +42,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         {/* Icon */}
         <div className="flex-shrink-0">
           <div className="w-12 h-12 flex items-center justify-center border border-exvia-border rounded-lg bg-white">
-            <Icon className="w-5 h-5 text-exvia-black" />
+            <ServiceIcon iconName={service.iconName} />
           </div>
         </div>
 
@@ -73,7 +72,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover"
+          className="grade-img w-full h-full object-cover"
         />
       </div>
     </div>
@@ -81,10 +80,10 @@ function ServiceCard({ service, index }: ServiceCardProps) {
 }
 
 export function Services() {
-  if (!servicesConfig.heading && servicesConfig.services.length === 0) return null;
-
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation({ threshold: 0.1 });
+
+  if (!servicesConfig.heading && servicesConfig.services.length === 0) return null;
 
   return (
     <section id="services" className="w-full py-24 lg:py-32 bg-white">

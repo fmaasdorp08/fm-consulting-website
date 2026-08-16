@@ -165,7 +165,7 @@ export function WhyFMPage() {
                     <td className="py-4 px-4 text-center text-exvia-black/60">{row.consultancy}</td>
                     <td className="py-4 px-4 text-center text-exvia-black font-medium bg-exvia-subtle/20">
                       <div className="flex items-center justify-center gap-2">
-                        <Check className="w-4 h-4 text-green-600" />
+                        <Check className="w-4 h-4 text-exvia-black" />
                         {row.fm}
                       </div>
                     </td>
@@ -197,7 +197,7 @@ export function WhyFMPage() {
               >
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-4 h-4 fill-exvia-black text-exvia-black" />
                   ))}
                 </div>
                 <p className="text-exvia-black/70 mb-6 leading-relaxed">
@@ -207,7 +207,7 @@ export function WhyFMPage() {
                   <img
                     src={testimonial.image}
                     alt={testimonial.author}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="grade-img w-12 h-12 rounded-full object-cover"
                   />
                   <div>
                     <div className="font-semibold text-exvia-black">{testimonial.author}</div>

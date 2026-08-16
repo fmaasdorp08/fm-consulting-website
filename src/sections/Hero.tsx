@@ -9,8 +9,6 @@ const boxSize = 450;
 const halfBox = boxSize / 2;
 
 export function Hero() {
-  if (!heroConfig.name && heroConfig.roles.length === 0) return null;
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -37,7 +35,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full min-h-screen overflow-hidden bg-neutral-900"
+      className="relative w-full min-h-screen overflow-hidden bg-exvia-black"
       onMouseMove={handleMouseMove}
       style={{ '--mouse-x': 'calc(42vw - 200px)', '--mouse-y': 'calc(28vh - 200px)' } as React.CSSProperties}
     >
@@ -52,7 +50,7 @@ export function Hero() {
           src={heroConfig.backgroundImage}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'blur(15px) brightness(0.55)' }}
+          style={{ filter: 'grayscale(1) blur(15px) brightness(0.5)' }}
           onLoad={() => setImageLoaded(true)}
         />
       </div>
@@ -84,7 +82,7 @@ export function Hero() {
             src={heroConfig.backgroundImage}
             alt=""
             className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.85)' }}
+            style={{ filter: 'grayscale(1) contrast(1.04) brightness(0.8)' }}
           />
         </div>
       </div>
@@ -171,11 +169,9 @@ export function Hero() {
           >
             {heroConfig.primaryCta && (
               <Magnetic>
-                <Link to="/contact">
-                  <AnimatedButton variant="outline-white" size="lg" showIcon>
-                    {heroConfig.primaryCta}
-                  </AnimatedButton>
-                </Link>
+                <AnimatedButton to="/contact" variant="outline-white" size="lg" showIcon>
+                  {heroConfig.primaryCta}
+                </AnimatedButton>
               </Magnetic>
             )}
             {heroConfig.secondaryCta && (

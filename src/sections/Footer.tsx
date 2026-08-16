@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Linkedin, Twitter, Instagram, Facebook, Youtube, Github, Dribbble, Circle } from 'lucide-react';
 import { footerConfig, contactConfig } from '@/config';
 import { type ElementType } from 'react';
+import { BrandLogo } from '@/components/BrandLogo';
 
 const iconMap: Record<string, ElementType> = {
   Linkedin,
@@ -22,8 +23,6 @@ function getIcon(iconName: string): ElementType {
 }
 
 export function Footer() {
-  if (!footerConfig.logo && footerConfig.columns.length === 0 && footerConfig.socialLinks.length === 0) return null;
-
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
 
@@ -65,10 +64,20 @@ export function Footer() {
             )}
           >
             {footerConfig.logo && (
-              <Link to="/" className="inline-block">
-                <span className="text-2xl font-semibold tracking-tight">{footerConfig.logo}</span>
+              <Link
+                to="/"
+                aria-label="FM Consulting ZA home"
+                className="inline-flex items-center gap-3 bg-white p-2 pr-4 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <BrandLogo variant="app-icon" decorative className="h-16 w-16" />
+                <span className="text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.22em]">
+                  {footerConfig.logo}
+                </span>
               </Link>
             )}
+            <p className="text-xs font-geist-mono uppercase tracking-[0.22em] text-fm-grey">
+              Ruthless Minimal. Future-Focused.
+            </p>
             {footerConfig.description && (
               <p className="text-sm text-white/60 max-w-xs leading-relaxed">
                 {footerConfig.description}
@@ -105,7 +114,7 @@ export function Footer() {
               )}
               style={{ transitionDelay: `${(colIndex + 1) * 100}ms` }}
             >
-              <h4 className="text-xs font-geist-mono uppercase tracking-widest text-white/40 mb-4">
+              <h4 className="text-xs font-geist-mono uppercase tracking-widest text-fm-grey mb-4">
                 {column.title}
               </h4>
               <ul className="space-y-3">
@@ -133,7 +142,7 @@ export function Footer() {
               )}
               style={{ transitionDelay: '400ms' }}
             >
-              <h4 className="text-xs font-geist-mono uppercase tracking-widest text-white/40 mb-4">
+              <h4 className="text-xs font-geist-mono uppercase tracking-widest text-fm-grey mb-4">
                 {footerConfig.newsletterHeading}
               </h4>
               {footerConfig.newsletterDescription && (
@@ -185,12 +194,12 @@ export function Footer() {
             style={{ transitionDelay: '500ms' }}
           >
             {footerConfig.copyright && (
-              <p className="text-xs text-white/40">
+              <p className="text-xs text-fm-grey">
                 {footerConfig.copyright}
               </p>
             )}
             {footerConfig.credit && (
-              <p className="text-xs text-white/40">
+              <p className="text-xs text-fm-grey">
                 {footerConfig.credit}
               </p>
             )}

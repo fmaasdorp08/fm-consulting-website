@@ -15,20 +15,13 @@ export function Counter({ value, duration = 1.6, className }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
   const reduced = useReducedMotion();
-  const [display, setDisplay] = useState(value);
+  const [animated, setAnimated] = useState({ value, display: value });
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduced) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || reduced) return;
 
     const match = value.match(/^([^\d]*)([\d.,]+)(.*)$/);
-    if (!match) {
-      setDisplay(value);
-      return;
-    }
+    if (!match) return;
 
     const [, prefix, numStr, suffix] = match;
     const target = parseFloat(numStr.replace(/,/g, ''));
@@ -41,13 +34,15 @@ export function Counter({ value, duration = 1.6, className }: CounterProps) {
     const tick = (now: number) => {
       const progress = Math.min((now - start) / (duration * 1000), 1);
       const current = target * ease(progress);
-      setDisplay(`${prefix}${current.toFixed(decimals)}${suffix}`);
+      setAnimated({ value, display: `${prefix}${current.toFixed(decimals)}${suffix}` });
       if (progress < 1) raf = requestAnimationFrame(tick);
-      else setDisplay(value);
+      else setAnimated({ value, display: value });
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, value, duration, reduced]);
+
+  const display = animated.value === value ? animated.display : value;
 
   return (
     <span ref={ref} className={className}>

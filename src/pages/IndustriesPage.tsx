@@ -75,7 +75,7 @@ export function IndustriesPage() {
                     <img
                       src={industry.image}
                       alt={industry.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="grade-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   
@@ -114,7 +114,7 @@ export function IndustriesPage() {
                         <ul className="space-y-1">
                           {industry.solutions.slice(0, 2).map((solution, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm text-exvia-black/60">
-                              <span className="w-1 h-1 bg-green-500 rounded-full mt-1.5 flex-shrink-0" />
+                              <span className="w-1 h-1 bg-exvia-black rounded-full mt-1.5 flex-shrink-0" />
                               {solution}
                             </li>
                           ))}
@@ -191,7 +191,7 @@ export function IndustriesPage() {
                         <ul className="space-y-2">
                           {industry.solutions.map((solution, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm text-exvia-black/70">
-                              <span className="w-1 h-1 bg-green-500 rounded-full mt-1.5 flex-shrink-0" />
+                              <span className="w-1 h-1 bg-exvia-black rounded-full mt-1.5 flex-shrink-0" />
                               {solution}
                             </li>
                           ))}
@@ -205,7 +205,7 @@ export function IndustriesPage() {
                       <img
                         src={industry.image}
                         alt={industry.name}
-                        className="w-full h-full object-cover"
+                        className="grade-img w-full h-full object-cover"
                       />
                     </div>
                   </div>

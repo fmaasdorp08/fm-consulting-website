@@ -272,7 +272,7 @@ export function ServicesPage() {
                       <ul className="space-y-2">
                         {service.outcomes.map((outcome, i) => (
                           <li key={i} className="flex items-start gap-3 text-exvia-black/70">
-                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 bg-exvia-black rounded-full mt-2 flex-shrink-0" />
                             {outcome}
                           </li>
                         ))}
@@ -311,7 +311,7 @@ export function ServicesPage() {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover"
+                      className="grade-img w-full h-full object-cover"
                     />
                   </div>
                 </div>

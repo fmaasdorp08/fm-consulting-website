@@ -1,4 +1,4 @@
-# Exvia
+# FM Consulting ZA Website
 
 ## Language
 If the user has not specified a language of the website, then the language of the website (the content you insert into the template) must match the language of the user's query.
@@ -22,9 +22,9 @@ The actual content of the website should match the user's query.
 ## Tech Stack
 - React 19 + TypeScript
 - Vite 7
-- Tailwind CSS 3 with custom Exvia design system tokens
+- Tailwind CSS 3 with FM Consulting brand tokens
 - Lucide React icons (dynamically resolved by PascalCase name)
-- Geist font family (Regular 400, Medium 500, Mono 500) via CDN
+- Geist display type with Inter body and label typography served locally
 - shadcn/ui component primitives
 
 ## Quick Start
@@ -159,8 +159,8 @@ Place all images in `public/images/`:
 
 ## Design System
 
-- **Colors**: Black (#131313), White (#FFFFFF), Base Black (#1D1D1D), Subtle (#EAEAEA), Border (#EFEFF2), Blue (#0082F3), Focus (#4D65FF)
-- **Typography**: Geist font (400 regular, 500 medium), GeistMono (500 medium) for labels and monospace
+- **Colors**: Primary Black (#000000), Pure White (#FFFFFF), Secondary Grey (#B0B0B0), Off White (#F5F5F5)
+- **Typography**: Bold modern geometric display type with Inter / Helvetica Neue for body copy and wide-tracked labels
 - **Easing**: Custom timing functions - out-quad, out-cubic, out-quart, out-circ, in-out-quad
 - **Layout**: Full-width sections, container-large (80rem max), responsive grid layouts
 

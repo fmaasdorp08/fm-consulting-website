@@ -4,36 +4,43 @@
 
 @layer base {
   :root {
-    /* Exvia Design System Colors */
-    --exvia-black: #131313;
+    /* FM Consulting ZA brand system */
+    --fm-black: #000000;
+    --fm-white: #FFFFFF;
+    --fm-grey: #B0B0B0;
+    --fm-off-white: #F5F5F5;
+    --fm-border: #D9D9D9;
+
+    /* Legacy aliases keep established components stable. */
+    --exvia-black: var(--fm-black);
     --exvia-white: #FFFFFF;
-    --exvia-base-black: #1D1D1D;
-    --exvia-subtle: #EAEAEA;
-    --exvia-border: #EFEFF2;
-    --exvia-blue: #0082F3;
-    --exvia-focus: #4D65FF;
+    --exvia-base-black: var(--fm-black);
+    --exvia-subtle: var(--fm-off-white);
+    --exvia-border: var(--fm-border);
+    --exvia-blue: var(--fm-black);
+    --exvia-focus: var(--fm-black);
     
-    /* shadcn tokens mapped to Exvia */
+    /* shadcn tokens mapped to the FM palette */
     --background: 0 0% 100%;
-    --foreground: 0 0% 7.5%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7.5%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7.5%;
-    --primary: 0 0% 7.5%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 7.5%;
-    --muted: 0 0% 92%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 7.5%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 6% 94%;
-    --input: 240 6% 94%;
-    --ring: 0 0% 7.5%;
-    --radius: 0.5rem;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 0 0% 0%;
+    --radius: 0.125rem;
     
     /* Animation Easings */
     --ease-out-quad: cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -51,16 +58,25 @@
   
   html {
     scroll-behavior: smooth;
-    font-family: 'Geist', Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Geist', Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: var(--exvia-black);
     overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Geist', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
@@ -71,7 +87,8 @@
   }
   
   .font-geist-mono {
-    font-family: 'Geist Mono', 'Courier New', monospace;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
   }
   
   .text-h1 {
@@ -341,7 +358,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background: var(--fm-black);
 }
 
 /* Mobile responsive typography */

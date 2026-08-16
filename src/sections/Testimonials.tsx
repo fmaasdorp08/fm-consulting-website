@@ -5,8 +5,6 @@ import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { testimonialsConfig } from '@/config';
 
 export function Testimonials() {
-  if (!testimonialsConfig.heading && testimonialsConfig.testimonials.length === 0) return null;
-
   const testimonials = testimonialsConfig.testimonials;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);

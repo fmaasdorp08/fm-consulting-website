@@ -1,0 +1,17 @@
+{
+  "name": "FM Consulting ZA",
+  "short_name": "FM Consulting",
+  "description": "South African business growth, strategy and performance consulting.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/brand/fm-app-icon.png",
+      "sizes": "800x800",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

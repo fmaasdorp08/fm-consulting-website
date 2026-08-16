@@ -13,12 +13,12 @@ const categoryIcons: Record<string, React.ElementType> = {
 };
 
 const categoryColors: Record<string, string> = {
-  "Strategy": "bg-blue-100 text-blue-700",
-  "Customer Experience": "bg-purple-100 text-purple-700",
-  "Analytics": "bg-green-100 text-green-700",
-  "Growth": "bg-orange-100 text-orange-700",
-  "Performance": "bg-red-100 text-red-700",
-  "SME": "bg-teal-100 text-teal-700",
+  "Strategy": "bg-exvia-subtle text-exvia-black border border-exvia-border",
+  "Customer Experience": "bg-exvia-subtle text-exvia-black border border-exvia-border",
+  "Analytics": "bg-exvia-subtle text-exvia-black border border-exvia-border",
+  "Growth": "bg-exvia-subtle text-exvia-black border border-exvia-border",
+  "Performance": "bg-exvia-subtle text-exvia-black border border-exvia-border",
+  "SME": "bg-exvia-subtle text-exvia-black border border-exvia-border",
 };
 
 export function InsightsPage() {

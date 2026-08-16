@@ -38,19 +38,29 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        exvia: {
-          black: '#131313',
+        fm: {
+          black: '#000000',
           white: '#FFFFFF',
-          'base-black': '#1D1D1D',
-          subtle: '#EAEAEA',
-          border: '#EFEFF2',
-          blue: '#0082F3',
-          focus: '#4D65FF',
+          grey: '#B0B0B0',
+          'off-white': '#F5F5F5',
+          border: '#D9D9D9',
+        },
+        // Legacy class alias retained to keep existing components stable.
+        exvia: {
+          black: '#000000',
+          white: '#FFFFFF',
+          'base-black': '#000000',
+          subtle: '#F5F5F5',
+          border: '#D9D9D9',
+          blue: '#000000',
+          focus: '#000000',
         },
       },
       fontFamily: {
         geist: ['Geist', 'Arial', 'sans-serif'],
-        'geist-mono': ['Geist Mono', 'Courier New', 'monospace'],
+        inter: ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        // Existing label classes now resolve to the approved Inter family.
+        'geist-mono': ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
       fontSize: {
         'h1': ['clamp(3rem, 21vw, 21vw)', { lineHeight: '1', letterSpacing: '-0.04em' }],

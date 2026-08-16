@@ -9,7 +9,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   language: "en",
-  title: "FM Consulting | Business Growth & Strategy Consultants",
+  title: "FM Consulting ZA | Business Growth & Strategy Consultants",
   description: "FM Consulting helps South African businesses grow through smarter strategy, sharper execution, and measurable commercial outcomes. Specialising in growth strategy, digital marketing, customer acquisition, and business performance.",
 };
 
@@ -27,7 +27,7 @@ export interface NavigationConfig {
 }
 
 export const navigationConfig: NavigationConfig = {
-  logo: "FM Consulting",
+  logo: "FM Consulting ZA",
   links: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -331,7 +331,7 @@ export interface FooterConfig {
 }
 
 export const footerConfig: FooterConfig = {
-  logo: "FM Consulting",
+  logo: "FM Consulting ZA",
   description: "South African business growth consultancy helping companies improve acquisition, retention, efficiency, and commercial outcomes through strategy, analytics, and performance-led execution.",
   columns: [
     {

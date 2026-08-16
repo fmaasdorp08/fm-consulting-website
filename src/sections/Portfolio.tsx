@@ -1,4 +1,3 @@
-import { } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowUpRight } from 'lucide-react';
@@ -57,10 +56,10 @@ function ProjectCard({ project, index, isVisible }: { project: { title: string; 
 }
 
 export function Portfolio() {
-  if (!portfolioConfig.heading && portfolioConfig.projects.length === 0) return null;
-
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
   const { containerRef: gridRef, visibleItems } = useStaggerAnimation(portfolioConfig.projects.length + 1, 120);
+
+  if (!portfolioConfig.heading && portfolioConfig.projects.length === 0) return null;
 
   return (
     <section id="portfolio" className="w-full py-24 lg:py-32 bg-exvia-subtle/30">

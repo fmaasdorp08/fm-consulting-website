@@ -1,11 +1,13 @@
 import { useState, type CSSProperties, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface AnimatedButtonProps {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
+  to?: string;
   variant?: 'primary' | 'secondary' | 'outline' | 'outline-white';
   size?: 'sm' | 'md' | 'lg';
   showIcon?: boolean;
@@ -17,6 +19,7 @@ export function AnimatedButton({
   children,
   onClick,
   href,
+  to,
   variant = 'primary',
   size = 'md',
   showIcon = false,
@@ -82,6 +85,21 @@ export function AnimatedButton({
       >
         {content}
       </a>
+    );
+  }
+
+  if (to) {
+    return (
+      <Link
+        to={to}
+        className={baseStyles}
+        style={style}
+        onClick={onClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {content}
+      </Link>
     );
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Custom cursor: a small dot that locks to the pointer plus a trailing ring.
@@ -8,14 +8,12 @@ import { useEffect, useRef, useState } from 'react';
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!finePointer || prefersReduced) return;
 
-    setEnabled(true);
     document.documentElement.classList.add('has-custom-cursor');
 
     const dot = dotRef.current;
@@ -84,15 +82,6 @@ export function Cursor() {
       document.documentElement.classList.remove('has-custom-cursor');
     };
   }, []);
-
-  if (!enabled) {
-    return (
-      <>
-        <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
-        <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      </>
-    );
-  }
 
   return (
     <>

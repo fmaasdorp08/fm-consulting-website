@@ -192,8 +192,8 @@ export function ContactPage() {
                 {/* Response Expectation */}
                 <div className="mt-8 p-4 bg-white border border-exvia-border rounded-lg">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full">
-                      <Check className="w-4 h-4 text-green-600" />
+                    <div className="w-8 h-8 flex items-center justify-center bg-exvia-black rounded-full">
+                      <Check className="w-4 h-4 text-white" />
                     </div>
                     <div>
                       <div className="font-medium text-exvia-black">Fast Response</div>
@@ -214,8 +214,8 @@ export function ContactPage() {
               >
                 {submitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-green-100 rounded-full">
-                      <Check className="w-8 h-8 text-green-600" />
+                    <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-exvia-black rounded-full">
+                      <Check className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-semibold text-exvia-black mb-3">
                       Thank You!

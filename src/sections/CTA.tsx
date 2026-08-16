@@ -1,5 +1,3 @@
-import { } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { AnimatedButton } from '@/components/AnimatedButton';
@@ -10,9 +8,9 @@ import { Magnetic } from '@/components/motion/Magnetic';
 import { TextReveal } from '@/components/motion/Reveal';
 
 export function CTA() {
-  if (!ctaConfig.heading && !ctaConfig.description) return null;
-
   const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.3 });
+
+  if (!ctaConfig.heading && !ctaConfig.description) return null;
 
   return (
     <section id="contact" className="relative w-full py-32 lg:py-48 overflow-hidden">
@@ -22,6 +20,7 @@ export function CTA() {
           src={ctaConfig.backgroundImage}
           alt=""
           className="w-full h-full"
+          imgClassName="grayscale contrast-[1.04]"
           intensity={0.18}
         />
         <div className="absolute inset-0 bg-exvia-black/60" />
@@ -82,16 +81,15 @@ export function CTA() {
           >
             {ctaConfig.buttonText && (
               <Magnetic strength={0.3}>
-                <Link to={ctaConfig.buttonHref}>
-                  <AnimatedButton
-                    variant="primary"
-                    size="lg"
-                    showIcon
-                    className="bg-white text-exvia-black hover:bg-white/90"
-                  >
-                    {ctaConfig.buttonText}
-                  </AnimatedButton>
-                </Link>
+                <AnimatedButton
+                  to={ctaConfig.buttonHref}
+                  variant="primary"
+                  size="lg"
+                  showIcon
+                  className="bg-white text-exvia-black hover:bg-white/90"
+                >
+                  {ctaConfig.buttonText}
+                </AnimatedButton>
               </Magnetic>
             )}
 

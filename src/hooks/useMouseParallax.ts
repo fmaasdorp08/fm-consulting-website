@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface MousePosition {
   x: number;
@@ -10,36 +10,37 @@ interface ParallaxValues {
   y: number;
 }
 
+const lerp = (start: number, end: number, factor: number) => {
+  return start + (end - start) * factor;
+};
+
 export function useMouseParallax(intensity: number = 40, inverted: boolean = false) {
   const elementRef = useRef<HTMLDivElement>(null);
   const [parallax, setParallax] = useState<ParallaxValues>({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
   const targetRef = useRef<ParallaxValues>({ x: 0, y: 0 });
   const currentRef = useRef<ParallaxValues>({ x: 0, y: 0 });
-  const isActiveRef = useRef(true);
-
-  const lerp = (start: number, end: number, factor: number) => {
-    return start + (end - start) * factor;
-  };
-
-  const animate = useCallback(() => {
-    if (!isActiveRef.current) return;
-
-    currentRef.current.x = lerp(currentRef.current.x, targetRef.current.x, 0.1);
-    currentRef.current.y = lerp(currentRef.current.y, targetRef.current.y, 0.1);
-
-    setParallax({
-      x: currentRef.current.x,
-      y: currentRef.current.y,
-    });
-
-    rafId.current = requestAnimationFrame(animate);
-  }, []);
 
   useEffect(() => {
     // Check for touch device
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
     if (isTouchDevice) return;
+
+    let isActive = true;
+
+    const animate = () => {
+      if (!isActive) return;
+
+      currentRef.current.x = lerp(currentRef.current.x, targetRef.current.x, 0.1);
+      currentRef.current.y = lerp(currentRef.current.y, targetRef.current.y, 0.1);
+
+      setParallax({
+        x: currentRef.current.x,
+        y: currentRef.current.y,
+      });
+
+      rafId.current = requestAnimationFrame(animate);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       const centerX = window.innerWidth / 2;
@@ -61,13 +62,13 @@ export function useMouseParallax(intensity: number = 40, inverted: boolean = fal
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
+      isActive = false;
       window.removeEventListener('mousemove', handleMouseMove);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
       }
-      isActiveRef.current = false;
     };
-  }, [intensity, inverted, animate]);
+  }, [intensity, inverted]);
 
   return { elementRef, parallax };
 }

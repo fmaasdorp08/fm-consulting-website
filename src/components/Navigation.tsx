@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { AnimatedButton } from './AnimatedButton';
+import { BrandLogo } from './BrandLogo';
 import { navigationConfig } from '@/config';
 
 export function Navigation() {
-  if (!navigationConfig.logo && navigationConfig.links.length === 0) return null;
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -31,11 +30,6 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
-
   // Determine if we should use dark or light text
   // On homepage, use light text when not scrolled, dark when scrolled
   // On other pages, always use dark text
@@ -50,15 +44,22 @@ export function Navigation() {
           isScrolled || !isHomePage ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
         )}
       >
-        <div className="w-full px-6 lg:px-12 py-4">
+        <div className="w-full px-6 lg:px-12 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
             {navigationConfig.logo && (
-              <Link to="/" className="flex items-center">
-                <span className={cn(
-                  "text-2xl font-semibold tracking-tight transition-colors duration-500",
-                  useLightText ? "text-white" : "text-exvia-black"
-                )}>
+              <Link
+                to="/"
+                aria-label="FM Consulting ZA home"
+                className="flex items-center gap-2 bg-white text-black border border-black/10 p-1 pr-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                <BrandLogo
+                  variant="app-icon"
+                  decorative
+                  eager
+                  className="h-12 w-12 sm:h-14 sm:w-14"
+                />
+                <span className="hidden sm:block text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.22em] text-black">
                   {navigationConfig.logo}
                 </span>
               </Link>
@@ -91,14 +92,13 @@ export function Navigation() {
             {/* Contact Button */}
             {navigationConfig.contactLabel && (
               <div className="hidden lg:block">
-                <Link to={navigationConfig.contactHref || "/contact"}>
-                  <AnimatedButton
-                    variant={useLightText ? "outline-white" : "primary"}
-                    size="md"
-                  >
-                    {navigationConfig.contactLabel}
-                  </AnimatedButton>
-                </Link>
+                <AnimatedButton
+                  to={navigationConfig.contactHref || "/contact"}
+                  variant={useLightText ? "outline-white" : "primary"}
+                  size="md"
+                >
+                  {navigationConfig.contactLabel}
+                </AnimatedButton>
               </div>
             )}
 
@@ -106,8 +106,10 @@ export function Navigation() {
             {navigationConfig.links.length > 0 && (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden relative w-8 h-6 flex flex-col justify-between"
-                aria-label="Toggle menu"
+                className="lg:hidden relative w-8 h-6 flex flex-col justify-between focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 <span
                   className={cn(
@@ -139,6 +141,7 @@ export function Navigation() {
       {/* Mobile Menu Overlay */}
       {navigationConfig.links.length > 0 && (
         <div
+          id="mobile-navigation"
           className={cn(
             'fixed inset-0 z-40 bg-white transition-all duration-500 ease-out-cubic lg:hidden',
             isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
@@ -149,8 +152,9 @@ export function Navigation() {
               <Link
                 key={link.label}
                 to={link.href}
+                onClick={() => setIsMenuOpen(false)}
                 className={cn(
-                  'text-3xl font-semibold text-exvia-black transition-all duration-500 ease-out-quart',
+                  'text-3xl font-semibold text-exvia-black transition-all duration-500 ease-out-quart focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black',
                   isMenuOpen
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
@@ -161,19 +165,19 @@ export function Navigation() {
               </Link>
             ))}
             {navigationConfig.contactLabel && (
-              <Link to={navigationConfig.contactHref || "/contact"}>
-                <AnimatedButton
-                  variant="primary"
-                  size="lg"
-                  className={cn(
-                    'mt-4 transition-all duration-500 ease-out-quart',
-                    isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  )}
-                  style={{ transitionDelay: isMenuOpen ? '400ms' : '0ms' }}
-                >
-                  {navigationConfig.contactLabel}
-                </AnimatedButton>
-              </Link>
+              <AnimatedButton
+                to={navigationConfig.contactHref || "/contact"}
+                onClick={() => setIsMenuOpen(false)}
+                variant="primary"
+                size="lg"
+                className={cn(
+                  'mt-4 transition-all duration-500 ease-out-quart',
+                  isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                )}
+                style={{ transitionDelay: isMenuOpen ? '400ms' : '0ms' }}
+              >
+                {navigationConfig.contactLabel}
+              </AnimatedButton>
             )}
           </div>
         </div>

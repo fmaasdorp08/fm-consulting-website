@@ -130,7 +130,7 @@ export function AboutPage() {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
+                      className="grade-img w-full h-full object-cover transition-transform duration-500 ease-out-quad group-hover:scale-105"
                     />
                   </div>
                 </div>
