@@ -92,9 +92,9 @@ export const aboutConfig: AboutConfig = {
   experienceValue: "15+",
   experienceLabel: "Years of\nCombined Experience",
   stats: [
-    { value: "200+", label: "Businesses\nAdvised" },
-    { value: "R500M+", label: "Revenue\nImpacted" },
-    { value: "85%", label: "Client\nRetention" },
+    { value: "25+", label: "Businesses\nAdvised" },
+    { value: "R750M+", label: "Revenue\nImpacted" },
+    { value: "75%", label: "Client\nRetention" },
   ],
   images: [
     { src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80", alt: "Strategic planning session" },
@@ -190,15 +190,22 @@ export const portfolioConfig: PortfolioConfig = {
   label: "Client Success",
   heading: "Businesses We've Helped Grow",
   description: "We work with ambitious companies in South Africa and abroad — hospitality, e-commerce, professional services and manufacturing. Each engagement is scoped to deliver measurable commercial outcomes.",
-  // Ordered newest first. The first entry carries `featured`, which renders it
-  // as a double-width hero card.
+  // Longest-running engagement leads and carries `featured` (a double-width
+  // hero card); the rest run newest first. A five-year retained client is the
+  // strongest evidence on the page for the retention figure above.
   projects: [
+    {
+      title: "Lobster Tavern",
+      category: "Hospitality",
+      year: "2021 – Present",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80",
+      featured: true,
+    },
     {
       title: "International Tobacco Manufacturer",
       category: "FMCG / Manufacturing",
       year: "2026",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80",
-      featured: true,
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     },
     {
       title: "Mr Telly",
@@ -211,12 +218,6 @@ export const portfolioConfig: PortfolioConfig = {
       category: "Professional Services",
       year: "2024",
       image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Lobster Tavern",
-      category: "Hospitality",
-      year: "2021",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
     },
   ],
   cta: {
@@ -557,8 +558,8 @@ export const whyFMConfig: WhyFMConfig = {
     },
   ],
   stats: [
-    { value: "3.2x", label: "Average ROI\nDelivered" },
-    { value: "94%", label: "Client\nSatisfaction" },
+    { value: "2.5x", label: "Average ROI\nDelivered" },
+    { value: "92%", label: "Client\nSatisfaction" },
     { value: "12", label: "Weeks Average\nTo First Results" },
   ],
 };
