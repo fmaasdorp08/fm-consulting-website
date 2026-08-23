@@ -189,32 +189,34 @@ export interface PortfolioConfig {
 export const portfolioConfig: PortfolioConfig = {
   label: "Client Success",
   heading: "Businesses We've Helped Grow",
-  description: "We work with ambitious companies across South Africa, from hospitality brands and professional services to e-commerce and B2B technology firms. Each engagement is tailored to deliver measurable commercial outcomes.",
+  description: "We work with ambitious companies in South Africa and abroad — hospitality, e-commerce, professional services and manufacturing. Each engagement is scoped to deliver measurable commercial outcomes.",
+  // Ordered newest first. The first entry carries `featured`, which renders it
+  // as a double-width hero card.
   projects: [
     {
-      title: "Lobster Tavern",
-      category: "Hospitality",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80",
+      title: "International Tobacco Manufacturer",
+      category: "FMCG / Manufacturing",
+      year: "2026",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80",
       featured: true,
     },
     {
       title: "Mr Telly",
       category: "E-commerce",
-      year: "2024",
+      year: "2025",
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
     },
     {
       title: "Thynkverse",
       category: "Professional Services",
-      year: "2023",
+      year: "2024",
       image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      title: "International Tobacco Manufacturer",
-      category: "FMCG / Manufacturing",
-      year: "2023",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+      title: "Lobster Tavern",
+      category: "Hospitality",
+      year: "2021",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
     },
   ],
   cta: {
