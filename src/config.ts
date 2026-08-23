@@ -192,35 +192,29 @@ export const portfolioConfig: PortfolioConfig = {
   description: "We work with ambitious companies across South Africa, from hospitality brands and professional services to e-commerce and B2B technology firms. Each engagement is tailored to deliver measurable commercial outcomes.",
   projects: [
     {
-      title: "The Reserve Restaurant Group",
+      title: "Lobster Tavern",
       category: "Hospitality",
       year: "2024",
       image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80",
       featured: true,
     },
     {
-      title: "Luxe Home Collections",
+      title: "Mr Telly",
       category: "E-commerce",
       year: "2024",
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      title: "Argus Advisory Partners",
+      title: "Thynkverse",
       category: "Professional Services",
       year: "2023",
       image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      title: "B2B Connect Platform",
-      category: "Technology",
+      title: "International Tobacco Manufacturer",
+      category: "FMCG / Manufacturing",
       year: "2023",
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Foundry Co-Working Spaces",
-      category: "SME / Founder-led",
-      year: "2023",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
     },
   ],
   cta: {
@@ -233,6 +227,12 @@ export const portfolioConfig: PortfolioConfig = {
 };
 
 // Testimonials section configuration
+//
+// WARNING: the three entries below are placeholder copy from the original
+// site build. The people named do not exist and the figures are invented.
+// The section is currently NOT rendered (see HomePage.tsx). Do not restore
+// it until every quote is real, attributed to a named person who has given
+// permission, and carries figures you can evidence.
 export interface TestimonialItem {
   quote: string;
   author: string;
