@@ -39,28 +39,37 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         fm: {
-          black: '#000000',
+          ink: '#0F1211',
+          paper: '#F2F3F0',
+          graphite: '#585E5B',
+          silver: '#C6C9C4',
+          mist: '#E4E6E1',
           white: '#FFFFFF',
-          grey: '#B0B0B0',
-          'off-white': '#F5F5F5',
-          border: '#D9D9D9',
+          // Previous names, remapped so existing classes keep resolving.
+          black: '#0F1211',
+          grey: '#585E5B',
+          'off-white': '#E4E6E1',
+          border: '#C6C9C4',
         },
         // Legacy class alias retained to keep existing components stable.
         exvia: {
-          black: '#000000',
-          white: '#FFFFFF',
-          'base-black': '#000000',
-          subtle: '#F5F5F5',
-          border: '#D9D9D9',
-          blue: '#000000',
-          focus: '#000000',
+          black: '#0F1211',
+          white: '#F2F3F0',
+          'base-black': '#0F1211',
+          subtle: '#E4E6E1',
+          border: '#C6C9C4',
+          blue: '#0F1211',
+          focus: '#0F1211',
         },
       },
       fontFamily: {
-        geist: ['Geist', 'Arial', 'sans-serif'],
-        inter: ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-        // Existing label classes now resolve to the approved Inter family.
-        'geist-mono': ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        // Archivo carries the voice; IBM Plex Mono carries anything countable.
+        archivo: ['Archivo Variable', 'Archivo', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+        // Previous names, remapped so existing classes keep resolving.
+        geist: ['Archivo Variable', 'Archivo', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        inter: ['Archivo Variable', 'Archivo', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        'geist-mono': ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       fontSize: {
         'h1': ['clamp(3rem, 21vw, 21vw)', { lineHeight: '1', letterSpacing: '-0.04em' }],

@@ -66,13 +66,12 @@ export function Footer() {
             {footerConfig.logo && (
               <Link
                 to="/"
-                aria-label="FM Consulting ZA home"
-                className="inline-flex items-center gap-3 bg-white p-2 pr-4 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                aria-label="FM Consulting home"
+                className="inline-flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fm-paper"
               >
-                <BrandLogo variant="app-icon" decorative className="h-16 w-16" />
-                <span className="text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.22em]">
-                  {footerConfig.logo}
-                </span>
+                {/* Knockout drawing on the ink ground — strokes trimmed, aperture
+                    opened. The white chip is no longer needed. */}
+                <BrandLogo variant="lockup" reverse className="h-10 text-fm-paper" />
               </Link>
             )}
             <p className="text-xs font-geist-mono uppercase tracking-[0.22em] text-fm-grey">

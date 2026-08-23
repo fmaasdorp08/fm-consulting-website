@@ -1,13 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@fontsource/geist/400.css'
-import '@fontsource/geist/500.css'
-import '@fontsource/geist/600.css'
-import '@fontsource/geist/900.css'
-import '@fontsource/inter/400.css'
-import '@fontsource/inter/500.css'
-import '@fontsource/inter/600.css'
-import '@fontsource/inter/700.css'
+// Archivo variable — one file covers weight 100-900 and the width axis, which
+// is what the wordmark and display headings use (font-stretch: 125%).
+import '@fontsource-variable/archivo/wdth.css'
+// IBM Plex Mono carries anything countable: labels, figures, addresses.
+import '@fontsource/ibm-plex-mono/400.css'
+import '@fontsource/ibm-plex-mono/500.css'
 import './index.css'
 import App from './App.tsx'
 

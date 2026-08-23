@@ -4,42 +4,52 @@
 
 @layer base {
   :root {
-    /* FM Consulting ZA brand system */
-    --fm-black: #000000;
+    /* FM Consulting brand system — ink and paper, no accent colour.
+       Both carry the same faint green-grey cast so screen and print read as
+       one material. See the brand manual for CMYK and Pantone equivalents. */
+    --fm-ink: #0F1211;
+    --fm-paper: #F2F3F0;
+    --fm-graphite: #585E5B;
+    --fm-silver: #C6C9C4;
+    --fm-mist: #E4E6E1;
     --fm-white: #FFFFFF;
-    --fm-grey: #B0B0B0;
-    --fm-off-white: #F5F5F5;
-    --fm-border: #D9D9D9;
+
+    /* Previous names kept so existing components keep resolving. */
+    --fm-black: var(--fm-ink);
+    --fm-grey: var(--fm-graphite);
+    --fm-off-white: var(--fm-mist);
+    --fm-border: var(--fm-silver);
 
     /* Legacy aliases keep established components stable. */
-    --exvia-black: var(--fm-black);
-    --exvia-white: #FFFFFF;
-    --exvia-base-black: var(--fm-black);
-    --exvia-subtle: var(--fm-off-white);
-    --exvia-border: var(--fm-border);
-    --exvia-blue: var(--fm-black);
-    --exvia-focus: var(--fm-black);
+    --exvia-black: var(--fm-ink);
+    --exvia-white: var(--fm-paper);
+    --exvia-base-black: var(--fm-ink);
+    --exvia-subtle: var(--fm-mist);
+    --exvia-border: var(--fm-silver);
+    --exvia-blue: var(--fm-ink);
+    --exvia-focus: var(--fm-ink);
     
     /* shadcn tokens mapped to the FM palette */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --background: 80 11% 94.7%;
+    --foreground: 160 9% 6.5%;
+    --card: 80 11% 94.7%;
+    --card-foreground: 160 9% 6.5%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 42%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 0%;
+    --popover-foreground: 160 9% 6.5%;
+    --primary: 160 9% 6.5%;
+    --primary-foreground: 80 11% 94.7%;
+    --secondary: 84 9% 89.2%;
+    --secondary-foreground: 160 9% 6.5%;
+    --muted: 84 9% 89.2%;
+    --muted-foreground: 150 3% 35.7%;
+    --accent: 84 9% 89.2%;
+    --accent-foreground: 160 9% 6.5%;
+    /* Semantic, not brand — error states still need to read as errors. */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 0 0% 0%;
+    --border: 96 4% 77.8%;
+    --input: 96 4% 77.8%;
+    --ring: 160 9% 6.5%;
     --radius: 0.125rem;
     
     /* Animation Easings */
@@ -58,15 +68,15 @@
   
   html {
     scroll-behavior: smooth;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: var(--exvia-black);
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--fm-ink);
     overflow-x: hidden;
   }
 
@@ -76,19 +86,33 @@
   h4,
   h5,
   h6 {
-    font-family: 'Geist', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
 /* Typography Utilities */
 @layer utilities {
+  /* Class names retained so existing components keep working; both now
+     resolve to the brand faces. */
   .font-geist {
-    font-family: 'Geist', Arial, sans-serif;
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  
+
   .font-geist-mono {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* The wordmark voice — wide-set caps off Archivo's width axis. Caps only. */
+  .font-expanded {
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-stretch: 125%;
+    font-variation-settings: 'wdth' 125;
+  }
+
+  .font-mono-brand {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   
   .text-h1 {

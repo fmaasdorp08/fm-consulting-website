@@ -50,18 +50,12 @@ export function Navigation() {
             {navigationConfig.logo && (
               <Link
                 to="/"
-                aria-label="FM Consulting ZA home"
-                className="flex items-center gap-2 bg-white text-black border border-black/10 p-1 pr-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                aria-label="FM Consulting home"
+                className="flex items-center bg-fm-paper text-fm-ink border border-fm-ink/10 px-3 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fm-ink"
               >
-                <BrandLogo
-                  variant="app-icon"
-                  decorative
-                  eager
-                  className="h-12 w-12 sm:h-14 sm:w-14"
-                />
-                <span className="hidden sm:block text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.22em] text-black">
-                  {navigationConfig.logo}
-                </span>
+                {/* The real lockup — mark and wordmark at fixed 3w spacing.
+                    Never rebuild this from an icon plus letterspaced text. */}
+                <BrandLogo variant="lockup-compact" className="h-6 sm:h-7" />
               </Link>
             )}
 
