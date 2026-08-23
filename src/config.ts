@@ -93,7 +93,7 @@ export const aboutConfig: AboutConfig = {
   experienceLabel: "Years of\nCombined Experience",
   stats: [
     { value: "25+", label: "Businesses\nAdvised" },
-    { value: "R750M+", label: "Revenue\nImpacted" },
+    { value: "R750M+", label: "Client Revenue\nInfluenced" },
     { value: "75%", label: "Client\nRetention" },
   ],
   images: [
