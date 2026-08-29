@@ -17,6 +17,7 @@ import { ServicesPage } from '@/pages/ServicesPage';
 import { IndustriesPage } from '@/pages/IndustriesPage';
 import { WhyFMPage } from '@/pages/WhyFMPage';
 import { InsightsPage } from '@/pages/InsightsPage';
+import { ArticlePage } from '@/pages/ArticlePage';
 import { ContactPage } from '@/pages/ContactPage';
 
 function AnimatedRoutes() {
@@ -31,6 +32,7 @@ function AnimatedRoutes() {
         <Route path="/industries" element={<PageTransition><Seo title="Industries" description="Tailored growth strategies for hospitality, retail & e-commerce, professional services, B2B technology, SMEs, and consumer services." path="/industries" /><IndustriesPage /></PageTransition>} />
         <Route path="/why-fm" element={<PageTransition><Seo title="Why FM Consulting" description="Strategy without fluff. Performance with accountability. Commercially grounded thinking with practical execution." path="/why-fm" /><WhyFMPage /></PageTransition>} />
         <Route path="/insights" element={<PageTransition><Seo title="Insights" description="Practical insights on growth strategy, performance marketing, and business optimisation." path="/insights" /><InsightsPage /></PageTransition>} />
+        <Route path="/insights/:slug" element={<PageTransition><ArticlePage /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Seo title="Contact" description="Book a consultation with FM Consulting. We respond within 24 hours." path="/contact" /><ContactPage /></PageTransition>} />
       </Routes>
     </AnimatePresence>

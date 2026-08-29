@@ -564,77 +564,17 @@ export const whyFMConfig: WhyFMConfig = {
   ],
 };
 
-// Insights/Articles page configuration
-export interface ArticleItem {
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  slug: string;
-}
-
+// Insights page configuration. Article content lives in src/data/articles.ts.
 export interface InsightsConfig {
   label: string;
   heading: string;
   description: string;
-  articles: ArticleItem[];
 }
 
 export const insightsConfig: InsightsConfig = {
   label: "Insights",
   heading: "Thoughts on Growth, Strategy & Performance",
   description: "Practical insights and strategic perspectives on building businesses that grow sustainably and profitably.",
-  articles: [
-    {
-      title: "Why Marketing Efficiency Matters More Than Marketing Volume",
-      excerpt: "Most businesses focus on doing more marketing. The smart ones focus on doing better marketing. Here's how to shift from volume to efficiency.",
-      category: "Strategy",
-      date: "March 2024",
-      readTime: "6 min read",
-      slug: "marketing-efficiency-over-volume",
-    },
-    {
-      title: "The Real Cost of Poor Customer Journey Design",
-      excerpt: "Every friction point in your customer journey is costing you revenue. We break down how to identify and fix the leaks in your acquisition funnel.",
-      category: "Customer Experience",
-      date: "February 2024",
-      readTime: "8 min read",
-      slug: "cost-of-poor-customer-journey",
-    },
-    {
-      title: "What Most Businesses Misread About Acquisition Performance",
-      excerpt: "Looking at the wrong metrics leads to the wrong conclusions. Here's how to properly evaluate and optimise your customer acquisition efforts.",
-      category: "Analytics",
-      date: "February 2024",
-      readTime: "7 min read",
-      slug: "misreading-acquisition-performance",
-    },
-    {
-      title: "Retention Is Not a CRM Problem, It's a Growth Strategy Problem",
-      excerpt: "Businesses that treat retention as an afterthought are leaving money on the table. Here's why retention should be central to your growth strategy.",
-      category: "Growth",
-      date: "January 2024",
-      readTime: "5 min read",
-      slug: "retention-growth-strategy",
-    },
-    {
-      title: "How To Diagnose Where Your Business Is Really Bleeding Revenue",
-      excerpt: "A systematic approach to identifying the biggest opportunities for revenue improvement in your business.",
-      category: "Performance",
-      date: "January 2024",
-      readTime: "9 min read",
-      slug: "diagnose-revenue-bleeding",
-    },
-    {
-      title: "The SME Guide to Building a Performance Marketing Function",
-      excerpt: "How smaller businesses can build world-class marketing capabilities without enterprise-level budgets.",
-      category: "SME",
-      date: "December 2023",
-      readTime: "10 min read",
-      slug: "sme-performance-marketing-guide",
-    },
-  ],
 };
 
 // Contact page configuration
