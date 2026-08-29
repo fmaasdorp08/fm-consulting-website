@@ -179,8 +179,8 @@ export function ArticlePage() {
                 </ol>
                 <div className="mt-8 pt-5 border-t border-exvia-border grid grid-cols-2 gap-4">
                   <div>
-                    <p className="font-geist-mono text-[0.6rem] uppercase tracking-[0.14em] text-exvia-black/40">Words</p>
-                    <p className="mt-1 text-sm font-medium">{article.wordCount.toLocaleString('en-ZA')}</p>
+                    <p className="font-geist-mono text-[0.6rem] uppercase tracking-[0.14em] text-exvia-black/40">Estimated read</p>
+                    <p className="mt-1 text-sm font-medium">{article.readTime}</p>
                   </div>
                   <div>
                     <p className="font-geist-mono text-[0.6rem] uppercase tracking-[0.14em] text-exvia-black/40">Series</p>
@@ -207,9 +207,9 @@ export function ArticlePage() {
 
               <div className="editorial-prose">
                 <div className="flex items-center gap-4 mb-10 font-geist-mono text-[0.65rem] uppercase tracking-[0.16em] text-exvia-black/40">
-                  <span>Long read</span>
+                  <span>Estimated read</span>
                   <span className="h-px flex-1 bg-exvia-border" />
-                  <span>{article.wordCount.toLocaleString('en-ZA')} words</span>
+                  <span>{article.readTime}</span>
                 </div>
 
                 {article.blocks.map((block, index) => {
