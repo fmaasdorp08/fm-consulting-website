@@ -21,6 +21,18 @@
         window.gtag = function () { dataLayer.push(arguments); };
         gtag('js', new Date());
         gtag('config', 'G-Z729V3H6EY');
+
+        // Direct-contact clicks anywhere on the site (email, phone, WhatsApp).
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          var href = a.getAttribute('href') || '';
+          var method = /^mailto:/i.test(href) ? 'email'
+            : /^tel:/i.test(href) ? 'phone'
+            : /(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)/i.test(href) ? 'whatsapp'
+            : null;
+          if (method) gtag('event', 'contact_click', { method: method, page_path: location.pathname });
+        }, true);
       }
     </script>
 

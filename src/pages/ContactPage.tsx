@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { contactConfig } from '@/config';
+import { trackEvent } from '@/lib/analytics';
 import { Mail, Phone, MapPin, Clock, Send, Check } from 'lucide-react';
 
 export function ContactPage() {
@@ -46,6 +47,12 @@ export function ContactPage() {
 
     // No key configured yet — fall back to the visitor's email client
     if (!contactConfig.web3formsKey) {
+      trackEvent('generate_lead', {
+        lead_source: 'contact_form',
+        method: 'mailto_fallback',
+        service: formData.service || undefined,
+        budget: formData.budget || undefined,
+      });
       window.location.href = buildMailto();
       setSubmitted(true);
       return;
@@ -71,11 +78,21 @@ export function ContactPage() {
       });
       const data = await res.json();
       if (data.success) {
+        // Key event in GA4 — no personal details are sent, only the
+        // service and budget the visitor picked.
+        trackEvent('generate_lead', {
+          lead_source: 'contact_form',
+          method: 'web3forms',
+          service: formData.service || undefined,
+          budget: formData.budget || undefined,
+        });
         setSubmitted(true);
       } else {
+        trackEvent('contact_form_error', { reason: 'web3forms_rejected' });
         setError('Something went wrong sending your message. Please email us directly instead.');
       }
     } catch {
+      trackEvent('contact_form_error', { reason: 'network' });
       setError('Something went wrong sending your message. Please email us directly instead.');
     } finally {
       setSending(false);
