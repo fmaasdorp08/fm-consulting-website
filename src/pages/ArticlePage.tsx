@@ -70,7 +70,7 @@ export function ArticlePage() {
     '@type': 'Article',
     headline: article.title,
     description: article.excerpt,
-    image: `https://www.fouadmaasdorp.me${article.image}`,
+    image: `https://www.fmconsultingza.co.za${article.image}`,
     datePublished: article.publishedTime,
     dateModified: article.publishedTime,
     author: {
@@ -82,10 +82,10 @@ export function ArticlePage() {
       name: 'FM Consulting',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.fouadmaasdorp.me/icon-512.png',
+        url: 'https://www.fmconsultingza.co.za/icon-512.png',
       },
     },
-    mainEntityOfPage: `https://www.fouadmaasdorp.me${canonicalPath}`,
+    mainEntityOfPage: `https://www.fmconsultingza.co.za${canonicalPath}`,
   };
 
   return (

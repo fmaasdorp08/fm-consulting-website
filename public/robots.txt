@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.fouadmaasdorp.me/sitemap.xml
+Sitemap: https://www.fmconsultingza.co.za/sitemap.xml

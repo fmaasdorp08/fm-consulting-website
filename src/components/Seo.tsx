@@ -12,7 +12,7 @@ interface SeoProps {
   noIndex?: boolean;
 }
 
-const BASE_URL = 'https://www.fouadmaasdorp.me';
+const BASE_URL = 'https://www.fmconsultingza.co.za';
 
 /**
  * Per-page SEO metadata. React 19 hoists <title> and <meta> tags
