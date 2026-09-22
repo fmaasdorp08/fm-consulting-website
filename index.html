@@ -7,6 +7,23 @@
     <meta name="application-name" content="FM Consulting" />
     <meta name="apple-mobile-web-app-title" content="FM Consulting" />
 
+    <!-- Google Analytics 4 (FM Consulting Website, G-Z729V3H6EY). Loads only on
+         the production domain so localhost and Vercel preview traffic stay out
+         of the reports. Route changes are tracked by GA4's enhanced measurement
+         ("page changes based on browser history events"). -->
+    <script>
+      if (location.hostname === 'www.fmconsultingza.co.za') {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z729V3H6EY';
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'G-Z729V3H6EY');
+      }
+    </script>
+
     <!-- Favicons. The SVG is theme-aware and preferred by modern browsers; the
          .ico carries hand-tuned 16/32/48 rasters for everything else. -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
