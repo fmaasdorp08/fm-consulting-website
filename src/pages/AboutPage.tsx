@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { aboutConfig } from '@/config';
@@ -240,18 +241,18 @@ export function AboutPage() {
               Let's discuss how FM Consulting can help you achieve your growth objectives.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-exvia-black text-white font-medium rounded-lg hover:bg-exvia-black/90 transition-colors"
               >
                 Book a Consultation
-              </a>
-              <a
-                href="/services"
+              </Link>
+              <Link
+                to="/services"
                 className="inline-flex items-center justify-center px-8 py-4 border border-exvia-black text-exvia-black font-medium rounded-lg hover:bg-exvia-black hover:text-white transition-colors"
               >
                 Explore Our Services
-              </a>
+              </Link>
             </div>
           </div>
         </div>

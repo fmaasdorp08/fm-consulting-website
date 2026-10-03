@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { contactConfig } from '@/config';
-import { trackEvent } from '@/lib/analytics';
+import { trackContactFormStart, trackEvent, trackLead } from '@/lib/analytics';
 import { Mail, Phone, MapPin, Clock, Send, Check } from 'lucide-react';
 
 export function ContactPage() {
@@ -11,6 +12,15 @@ export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
+  const formStarted = useRef(false);
+
+  // First interaction with the form, so the funnel reads
+  // CTA click → form start → lead.
+  const handleFormFocus = () => {
+    if (formStarted.current) return;
+    formStarted.current = true;
+    trackContactFormStart();
+  };
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -47,12 +57,7 @@ export function ContactPage() {
 
     // No key configured yet — fall back to the visitor's email client
     if (!contactConfig.web3formsKey) {
-      trackEvent('generate_lead', {
-        lead_source: 'contact_form',
-        method: 'mailto_fallback',
-        service: formData.service || undefined,
-        budget: formData.budget || undefined,
-      });
+      trackLead({ method: 'mailto_fallback', service: formData.service, budget: formData.budget });
       window.location.href = buildMailto();
       setSubmitted(true);
       return;
@@ -78,14 +83,9 @@ export function ContactPage() {
       });
       const data = await res.json();
       if (data.success) {
-        // Key event in GA4 — no personal details are sent, only the
-        // service and budget the visitor picked.
-        trackEvent('generate_lead', {
-          lead_source: 'contact_form',
-          method: 'web3forms',
-          service: formData.service || undefined,
-          budget: formData.budget || undefined,
-        });
+        // Key event in GA4 and a Lead in Meta. No personal details are
+        // sent, only the service and budget the visitor picked.
+        trackLead({ method: 'web3forms', service: formData.service, budget: formData.budget });
         setSubmitted(true);
       } else {
         trackEvent('contact_form_error', { reason: 'web3forms_rejected' });
@@ -242,7 +242,7 @@ export function ContactPage() {
                     </p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} onFocus={handleFormFocus} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-exvia-black mb-2">
@@ -387,7 +387,11 @@ export function ContactPage() {
                     </button>
 
                     <p className="text-sm text-exvia-black/50 text-center">
-                      By submitting this form, you agree to our privacy policy.
+                      We use your details only to respond to your enquiry. See our{' '}
+                      <Link to="/privacy" className="underline underline-offset-4 hover:text-exvia-black">
+                        Privacy Policy
+                      </Link>
+                      .
                     </p>
                   </form>
                 )}

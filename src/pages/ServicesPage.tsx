@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { servicesConfig } from '@/config';
@@ -296,13 +297,13 @@ export function ServicesPage() {
                     </div>
                   </div>
 
-                  <a
-                    href="/contact"
+                  <Link
+                    to="/contact"
                     className="inline-flex items-center gap-2 mt-8 text-exvia-black font-medium hover:gap-3 transition-all"
                   >
                     Discuss Your Needs
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Image */}
@@ -333,18 +334,18 @@ export function ServicesPage() {
               for growth in your business.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-exvia-black font-medium rounded-lg hover:bg-white/90 transition-colors"
               >
                 Book a Free Consultation
-              </a>
-              <a
-                href="/industries"
+              </Link>
+              <Link
+                to="/industries"
                 className="inline-flex items-center justify-center px-8 py-4 border border-white/30 text-white font-medium rounded-lg hover:bg-white/10 transition-colors"
               >
                 Explore by Industry
-              </a>
+              </Link>
             </div>
           </div>
         </div>

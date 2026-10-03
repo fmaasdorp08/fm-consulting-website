@@ -1,5 +1,37 @@
-// FM Consulting Pty Ltd - Site Configuration
+// FM Consulting ZA (Pty) Ltd - Site Configuration
 // Premium Business Consulting Website
+
+// Measurement IDs. Both tags load only on the production domain, so localhost
+// and Vercel previews never pollute reports.
+export const analyticsConfig = {
+  productionHost: 'www.fmconsultingza.co.za',
+  ga4Id: 'G-Z729V3H6EY',
+  /** Meta Pixel (dataset) ID from Events Manager. Empty = the pixel stays off. */
+  metaPixelId: '',
+};
+
+// The registered entity, as it appears on the CIPC registration certificate.
+// Used by the legal pages and the footer.
+export const legalEntity = {
+  name: 'FM Consulting ZA (Pty) Ltd',
+  tradingName: 'FM Consulting',
+  registrationNumber: '2026/673704/07',
+  registeredOn: '24 August 2026',
+  jurisdiction: 'South Africa',
+  registeredOffice: '40 Bayview Road, Wynberg, Cape Town, 7800',
+  informationOfficer: 'Fouad Maasdorp',
+  informationOfficerRole: 'Director',
+  email: 'fmaasdorp@outlook.com',
+  phone: '+27 62 897 6939',
+  website: 'www.fmconsultingza.co.za',
+};
+
+// One date drives both legal pages' "Effective" and "Last updated" lines.
+export const legalDates = {
+  effective: '3 October 2026',
+  updated: '3 October 2026',
+  iso: '2026-10-03',
+};
 
 export interface SiteConfig {
   language: string;
@@ -373,10 +405,10 @@ export const footerConfig: FooterConfig = {
     { iconName: "Instagram", href: "#", label: "Instagram" },
   ],
   newsletterHeading: "Stay Informed",
-  newsletterDescription: "Receive insights on growth strategy, performance marketing, and business optimisation.",
+  newsletterDescription: "Receive insights on growth strategy, performance marketing, and business optimisation by email. Unsubscribe at any time.",
   newsletterButtonText: "Subscribe",
   newsletterPlaceholder: "Enter your email",
-  copyright: "© 2026 FM Consulting. All rights reserved.",
+  copyright: "© 2026 FM Consulting ZA (Pty) Ltd. All rights reserved.",
   credit: "",
 };
 

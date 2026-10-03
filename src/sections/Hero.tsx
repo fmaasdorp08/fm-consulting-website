@@ -161,6 +161,7 @@ export function Hero() {
         {/* CTAs */}
         {(heroConfig.primaryCta || heroConfig.secondaryCta) && (
           <div
+            data-cta-location="hero"
             className={cn(
               'flex flex-col sm:flex-row items-center gap-4 mb-12 transition-all duration-[1200ms] ease-out-quart',
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

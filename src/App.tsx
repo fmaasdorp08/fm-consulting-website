@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Navigation } from '@/components/Navigation';
@@ -9,6 +10,7 @@ import { Cursor } from '@/components/motion/Cursor';
 import { Grain } from '@/components/motion/Grain';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { Seo } from '@/components/Seo';
+import { trackRouteChange } from '@/lib/analytics';
 
 // Pages
 import { HomePage } from '@/pages/HomePage';
@@ -19,9 +21,16 @@ import { WhyFMPage } from '@/pages/WhyFMPage';
 import { InsightsPage } from '@/pages/InsightsPage';
 import { ArticlePage } from '@/pages/ArticlePage';
 import { ContactPage } from '@/pages/ContactPage';
+import { TermsPage } from '@/pages/legal/TermsPage';
+import { PrivacyPage } from '@/pages/legal/PrivacyPage';
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  // Meta Pixel needs an explicit PageView on every SPA route change.
+  useEffect(() => {
+    trackRouteChange(location.pathname);
+  }, [location.pathname]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -34,6 +43,8 @@ function AnimatedRoutes() {
         <Route path="/insights" element={<PageTransition><Seo title="Insights" description="Practical insights on growth strategy, performance marketing, and business optimisation." path="/insights" /><InsightsPage /></PageTransition>} />
         <Route path="/insights/:slug" element={<PageTransition><ArticlePage /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Seo title="Contact" description="Book a consultation with FM Consulting. We respond within 24 hours." path="/contact" /><ContactPage /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><Seo title="Terms of Service" description="The terms that govern your use of the FM Consulting website, operated by FM Consulting ZA (Pty) Ltd." path="/terms" /><TermsPage /></PageTransition>} />
+        <Route path="/privacy" element={<PageTransition><Seo title="Privacy Policy" description="How FM Consulting collects, uses and protects personal information under POPIA, and the rights you have." path="/privacy" /><PrivacyPage /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { whyFMConfig, testimonialsConfig } from '@/config';
@@ -232,18 +233,18 @@ export function WhyFMPage() {
               Book a consultation and see how our approach can help your business grow.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-exvia-black font-medium rounded-lg hover:bg-white/90 transition-colors"
               >
                 Book a Consultation
-              </a>
-              <a
-                href="/services"
+              </Link>
+              <Link
+                to="/services"
                 className="inline-flex items-center justify-center px-8 py-4 border border-white/30 text-white font-medium rounded-lg hover:bg-white/10 transition-colors"
               >
                 Explore Our Services
-              </a>
+              </Link>
             </div>
           </div>
         </div>

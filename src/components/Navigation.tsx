@@ -85,7 +85,7 @@ export function Navigation() {
 
             {/* Contact Button */}
             {navigationConfig.contactLabel && (
-              <div className="hidden lg:block">
+              <div className="hidden lg:block" data-cta-location="nav_desktop">
                 <AnimatedButton
                   to={navigationConfig.contactHref || "/contact"}
                   variant={useLightText ? "outline-white" : "primary"}
@@ -136,6 +136,7 @@ export function Navigation() {
       {navigationConfig.links.length > 0 && (
         <div
           id="mobile-navigation"
+          data-cta-location="nav_mobile_menu"
           className={cn(
             'fixed inset-0 z-40 bg-white transition-all duration-500 ease-out-cubic lg:hidden',
             isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'

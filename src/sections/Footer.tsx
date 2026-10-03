@@ -3,7 +3,13 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Linkedin, Twitter, Instagram, Facebook, Youtube, Github, Dribbble, Circle } from 'lucide-react';
-import { footerConfig, contactConfig } from '@/config';
+import { footerConfig, contactConfig, legalEntity } from '@/config';
+import { trackEvent, trackNewsletterSignup } from '@/lib/analytics';
+
+// Shown beside the field and stored with each sign-up, so there is a record
+// of exactly what the subscriber agreed to (POPIA s69).
+const NEWSLETTER_CONSENT =
+  'I agree to receive FM Consulting insights by email. I can unsubscribe at any time.';
 import { type ElementType } from 'react';
 import { BrandLogo } from '@/components/BrandLogo';
 
@@ -40,11 +46,22 @@ export function Footer() {
           from_name: 'FM Consulting Website',
           email: newsletterEmail,
           message: `New newsletter subscriber: ${newsletterEmail}`,
+          consent_wording: NEWSLETTER_CONSENT,
+          consent_given_at: new Date().toISOString(),
+          consent_page: window.location.href,
+          privacy_policy: 'https://www.fmconsultingza.co.za/privacy',
         }),
       });
       const data = await res.json();
-      setNewsletterStatus(data.success ? 'done' : 'error');
+      if (data.success) {
+        trackNewsletterSignup();
+        setNewsletterStatus('done');
+      } else {
+        trackEvent('newsletter_error', { reason: 'web3forms_rejected' });
+        setNewsletterStatus('error');
+      }
     } catch {
+      trackEvent('newsletter_error', { reason: 'network' });
       setNewsletterStatus('error');
     }
   };
@@ -172,6 +189,13 @@ export function Footer() {
                       {newsletterStatus === 'sending' ? 'Subscribing…' : footerConfig.newsletterButtonText}
                     </button>
                   )}
+                  <p className="text-[0.7rem] leading-relaxed text-white/45">
+                    {NEWSLETTER_CONSENT} See our{' '}
+                    <Link to="/privacy" className="underline underline-offset-2 hover:text-white">
+                      Privacy Policy
+                    </Link>
+                    .
+                  </p>
                   {newsletterStatus === 'error' && (
                     <p className="text-xs text-red-400">
                       Something went wrong — please try again.
@@ -193,10 +217,17 @@ export function Footer() {
             style={{ transitionDelay: '500ms' }}
           >
             {footerConfig.copyright && (
-              <p className="text-xs text-fm-grey">
+              <p className="text-xs text-fm-grey text-center md:text-left">
                 {footerConfig.copyright}
+                <span className="block sm:inline sm:ml-2 font-mono-brand tracking-wide text-white/35">
+                  Reg. {legalEntity.registrationNumber}
+                </span>
               </p>
             )}
+            <nav aria-label="Legal" className="flex items-center gap-6 font-geist-mono text-[0.68rem] uppercase tracking-[0.16em]">
+              <Link to="/privacy" className="text-fm-grey hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="text-fm-grey hover:text-white transition-colors">Terms of Service</Link>
+            </nav>
             {footerConfig.credit && (
               <p className="text-xs text-fm-grey">
                 {footerConfig.credit}

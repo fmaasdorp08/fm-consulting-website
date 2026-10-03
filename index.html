@@ -10,7 +10,9 @@
     <!-- Google Analytics 4 (FM Consulting Website, G-Z729V3H6EY). Loads only on
          the production domain so localhost and Vercel preview traffic stay out
          of the reports. Route changes are tracked by GA4's enhanced measurement
-         ("page changes based on browser history events"). -->
+         ("page changes based on browser history events"). Event tracking
+         (CTA, contact, form and newsletter) and the Meta Pixel live in
+         src/lib/analytics.ts. -->
     <script>
       if (location.hostname === 'www.fmconsultingza.co.za') {
         var s = document.createElement('script');
@@ -21,18 +23,6 @@
         window.gtag = function () { dataLayer.push(arguments); };
         gtag('js', new Date());
         gtag('config', 'G-Z729V3H6EY');
-
-        // Direct-contact clicks anywhere on the site (email, phone, WhatsApp).
-        document.addEventListener('click', function (e) {
-          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-          if (!a) return;
-          var href = a.getAttribute('href') || '';
-          var method = /^mailto:/i.test(href) ? 'email'
-            : /^tel:/i.test(href) ? 'phone'
-            : /(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)/i.test(href) ? 'whatsapp'
-            : null;
-          if (method) gtag('event', 'contact_click', { method: method, page_path: location.pathname });
-        }, true);
       }
     </script>
 
