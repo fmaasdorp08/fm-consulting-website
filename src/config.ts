@@ -7,7 +7,7 @@ export const analyticsConfig = {
   productionHost: 'www.fmconsultingza.co.za',
   ga4Id: 'G-Z729V3H6EY',
   /** Meta Pixel (dataset) ID from Events Manager. Empty = the pixel stays off. */
-  metaPixelId: '',
+  metaPixelId: '2156431668306851', // dataset "FM Consulting Website", FM Consulting Pty Ltd business
 };
 
 // The registered entity, as it appears on the CIPC registration certificate.
