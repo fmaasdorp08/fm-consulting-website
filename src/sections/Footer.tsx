@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Linkedin, Twitter, Instagram, Facebook, Youtube, Github, Dribbble, Circle } from 'lucide-react';
+import { ArrowUpRight, Linkedin, Twitter, Instagram, Facebook, Youtube, Github, Dribbble, Circle, MessageCircle } from 'lucide-react';
 import { footerConfig, contactConfig, legalEntity } from '@/config';
 import { openConsentPreferences, trackEvent, trackNewsletterSignup } from '@/lib/analytics';
 
@@ -14,6 +14,7 @@ import { type ElementType } from 'react';
 import { BrandLogo } from '@/components/BrandLogo';
 
 const iconMap: Record<string, ElementType> = {
+  MessageCircle,
   Linkedin,
   Twitter,
   Instagram,
@@ -101,16 +102,19 @@ export function Footer() {
             )}
 
             {/* Social Links */}
-            {footerConfig.socialLinks.length > 0 && (
+            {footerConfig.socialLinks.some((social) => social.href) && (
               <div className="flex gap-3 pt-2">
-                {footerConfig.socialLinks.map((social) => {
+                {footerConfig.socialLinks.filter((social) => social.href).map((social) => {
                   const Icon = getIcon(social.iconName);
                   return (
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-exvia-black transition-all duration-300"
-                      aria-label={social.label}
+                      aria-label={`FM Consulting on ${social.label}`}
+                      title={social.label}
                     >
                       <Icon className="w-4 h-4" />
                     </a>

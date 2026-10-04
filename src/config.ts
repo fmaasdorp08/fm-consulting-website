@@ -22,7 +22,7 @@ export const legalEntity = {
   registeredOffice: 'Wynberg, Cape Town',
   informationOfficer: 'Fouad Maasdorp',
   informationOfficerRole: 'Director',
-  email: 'fmaasdorp@outlook.com',
+  email: 'info@fmconsultingza.co.za',
   phone: '+27 62 897 6939',
   website: 'www.fmconsultingza.co.za',
 };
@@ -337,7 +337,7 @@ export const ctaConfig: CTAConfig = {
   description: "Book a consultation with our team. We'll discuss your business challenges, identify opportunities, and outline how FM Consulting can help you achieve measurable commercial outcomes.",
   buttonText: "Book Your Consultation",
   buttonHref: "/contact",
-  email: "fmaasdorp@outlook.com",
+  email: "info@fmconsultingza.co.za",
   backgroundImage: "/images/cta-bg.jpg",
 };
 
@@ -400,10 +400,18 @@ export const footerConfig: FooterConfig = {
       ],
     },
   ],
+  // Official business profiles. An entry with an empty href is not rendered,
+  // so a profile can be added here the moment its URL exists.
   socialLinks: [
-    { iconName: "Linkedin", href: "#", label: "LinkedIn" },
-    { iconName: "Twitter", href: "#", label: "Twitter" },
-    { iconName: "Instagram", href: "#", label: "Instagram" },
+    { iconName: "Linkedin", href: "", label: "LinkedIn" },
+    { iconName: "Facebook", href: "https://www.facebook.com/823784920806684", label: "Facebook" },
+    { iconName: "Instagram", href: "https://www.instagram.com/fmconsultingza/", label: "Instagram" },
+    { iconName: "Twitter", href: "", label: "X (Twitter)" },
+    {
+      iconName: "MessageCircle",
+      href: "https://wa.me/27628976939?text=Hi%20FM%20Consulting%2C%20I%20found%20you%20on%20your%20website.",
+      label: "WhatsApp",
+    },
   ],
   newsletterHeading: "Stay Informed",
   newsletterDescription: "Receive insights on growth strategy, performance marketing, and business optimisation by email. Unsubscribe at any time.",
@@ -642,7 +650,7 @@ export const contactConfig: ContactConfig = {
   description: "Ready to improve your business performance? Book a consultation with our team. We'll explore your challenges, identify opportunities, and outline how we can help.",
   formIntro: "Fill out the form below and we'll respond within 24 hours.",
   contactInfo: {
-    email: "fmaasdorp@outlook.com",
+    email: "info@fmconsultingza.co.za",
     phone: "+27 62 897 6939",
     address: "Cape Town, South Africa",
     hours: "Monday - Friday: 08:00 - 17:00 SAST",
