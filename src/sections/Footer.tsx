@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Linkedin, Twitter, Instagram, Facebook, Youtube, Github, Dribbble, Circle } from 'lucide-react';
 import { footerConfig, contactConfig, legalEntity } from '@/config';
-import { trackEvent, trackNewsletterSignup } from '@/lib/analytics';
+import { openConsentPreferences, trackEvent, trackNewsletterSignup } from '@/lib/analytics';
 
 // Shown beside the field and stored with each sign-up, so there is a record
 // of exactly what the subscriber agreed to (POPIA s69).
@@ -224,9 +224,12 @@ export function Footer() {
                 </span>
               </p>
             )}
-            <nav aria-label="Legal" className="flex items-center gap-6 font-geist-mono text-[0.68rem] uppercase tracking-[0.16em]">
+            <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-geist-mono text-[0.68rem] uppercase tracking-[0.16em]">
               <Link to="/privacy" className="text-fm-grey hover:text-white transition-colors">Privacy Policy</Link>
               <Link to="/terms" className="text-fm-grey hover:text-white transition-colors">Terms of Service</Link>
+              <button type="button" onClick={openConsentPreferences} className="font-geist-mono uppercase tracking-[0.16em] text-fm-grey hover:text-white transition-colors">
+                Cookie preferences
+              </button>
             </nav>
             {footerConfig.credit && (
               <p className="text-xs text-fm-grey">

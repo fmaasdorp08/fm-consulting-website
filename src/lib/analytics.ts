@@ -9,6 +9,12 @@
  * Privacy rule for every event: never send a visitor's name, email, phone or
  * message to Google or Meta. Only the choices they made (service, budget) and
  * where they clicked.
+ *
+ * Cookie choice: visitors from the UK, the EEA and Switzerland see a small,
+ * non-blocking notice and nothing that sets tracking cookies runs until they
+ * accept (GA4 runs in Consent Mode with storage denied; the Meta Pixel does
+ * not load). Everyone else sees nothing and measurement runs as normal. A
+ * Global Privacy Control signal is honoured everywhere as a "decline".
  */
 import { analyticsConfig } from '@/config';
 
@@ -24,7 +30,7 @@ type Fbq = ((...args: unknown[]) => void) & {
 
 declare global {
   interface Window {
-    gtag?: (command: 'event', eventName: string, params?: Params) => void;
+    gtag?: (...args: unknown[]) => void;
     fbq?: Fbq;
     _fbq?: Fbq;
   }
@@ -164,17 +170,158 @@ function handleClick(e: MouseEvent) {
 /* Public API                                                           */
 /* ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------ */
+/* Cookie choice                                                        */
+/* ------------------------------------------------------------------ */
+
+export type ConsentChoice = 'granted' | 'denied';
+
+// UK, EEA (EU-27 + Iceland, Liechtenstein, Norway) and Switzerland.
+// Keep in sync with CONSENT_REGIONS in index.html.
+const CONSENT_REGIONS = new Set([
+  'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU',
+  'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH',
+]);
+
+const CONSENT_KEY = 'fm_consent_v1';
+
+function readChoice(): ConsentChoice | null {
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(CONSENT_KEY) || 'null');
+    return saved && (saved.choice === 'granted' || saved.choice === 'denied') ? saved.choice : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveChoice(choice: ConsentChoice) {
+  try {
+    window.localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice, at: new Date().toISOString() }));
+  } catch {
+    /* storage unavailable — the choice still applies for this visit */
+  }
+}
+
+function hasGlobalPrivacyControl() {
+  return isBrowser && (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+}
+
+async function lookupCountry(): Promise<string | null> {
+  try {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 3000);
+    const res = await fetch('/api/geo', { cache: 'no-store', signal: controller.signal });
+    window.clearTimeout(timer);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { country?: string | null };
+    return data.country || null;
+  } catch {
+    return null;
+  }
+}
+
+function applyConsent(choice: ConsentChoice) {
+  if (!isProductionHost()) return;
+  const value = choice === 'granted' ? 'granted' : 'denied';
+  if (typeof window.gtag === 'function') {
+    window.gtag('consent', 'update', {
+      ad_storage: value,
+      ad_user_data: value,
+      ad_personalization: value,
+      analytics_storage: value,
+    });
+  }
+  if (choice === 'granted') {
+    if (analyticsConfig.metaPixelId) loadMetaPixel(analyticsConfig.metaPixelId);
+    if (typeof window.fbq === 'function') window.fbq('consent', 'grant');
+  } else if (typeof window.fbq === 'function') {
+    window.fbq('consent', 'revoke');
+  }
+}
+
+// Tiny store so the notice component can mount before or after the geo
+// lookup resolves.
+let noticeOpen = false;
+let noticeMode: 'region' | 'preferences' = 'region';
+const noticeListeners = new Set<(open: boolean) => void>();
+
+function setNoticeOpen(open: boolean, mode?: 'region' | 'preferences') {
+  noticeOpen = open;
+  if (mode) noticeMode = mode;
+  noticeListeners.forEach((fn) => fn(open));
+}
+
+/** 'region' = first visit from the UK/EEA/CH; 'preferences' = opened from the footer. */
+export function getConsentNoticeMode() {
+  return noticeMode;
+}
+
+export function subscribeConsentNotice(fn: (open: boolean) => void) {
+  noticeListeners.add(fn);
+  fn(noticeOpen);
+  return () => {
+    noticeListeners.delete(fn);
+  };
+}
+
+/** Footer "Cookie preferences" — lets anyone change or withdraw their choice. */
+export function openConsentPreferences() {
+  setNoticeOpen(true, 'preferences');
+}
+
+/** Close the footer-opened notice without changing anything. */
+export function closeConsentNotice() {
+  setNoticeOpen(false);
+}
+
+/** Called by the notice's Accept / Decline buttons. */
+export function setConsentChoice(choice: ConsentChoice) {
+  saveChoice(choice);
+  applyConsent(choice);
+  setNoticeOpen(false);
+}
+
+export function getConsentChoice() {
+  return isBrowser ? readChoice() : null;
+}
+
+/* ------------------------------------------------------------------ */
+/* Public API                                                           */
+/* ------------------------------------------------------------------ */
+
 let initialised = false;
 
 /** Call once at startup. */
 export function initAnalytics() {
   if (initialised || !isBrowser) return;
   initialised = true;
-  if (!isProductionHost()) return;
 
-  if (analyticsConfig.metaPixelId) loadMetaPixel(analyticsConfig.metaPixelId);
+  // Preview builds: ?consent_preview shows the notice so it can be reviewed.
+  if (!isProductionHost()) {
+    if (/[?&]consent_preview\b/.test(window.location.search)) setNoticeOpen(true);
+    return;
+  }
+
   // Capture phase so the event is recorded before React Router navigates.
   document.addEventListener('click', handleClick, true);
+
+  if (hasGlobalPrivacyControl()) {
+    applyConsent('denied');
+    return;
+  }
+
+  const saved = readChoice();
+  if (saved) {
+    applyConsent(saved);
+    return;
+  }
+
+  void lookupCountry().then((country) => {
+    // Unknown country: stay quiet and load nothing that sets ad cookies.
+    if (!country) return;
+    if (CONSENT_REGIONS.has(country)) setNoticeOpen(true, 'region');
+    else applyConsent('granted');
+  });
 }
 
 let lastPath: string | null = null;

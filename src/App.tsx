@@ -10,6 +10,7 @@ import { Cursor } from '@/components/motion/Cursor';
 import { Grain } from '@/components/motion/Grain';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { Seo } from '@/components/Seo';
+import { ConsentNotice } from '@/components/ConsentNotice';
 import { trackRouteChange } from '@/lib/analytics';
 
 // Pages
@@ -74,6 +75,9 @@ function App() {
 
           {/* Footer */}
           <Footer />
+
+          {/* Cookie choice — UK / EEA / CH visitors only */}
+          <ConsentNotice />
         </div>
       </SmoothScroll>
     </Router>

@@ -230,11 +230,12 @@ const sections: LegalSection[] = [
             { label: 'Registration no.', value: <span className="font-mono-brand">{legalEntity.registrationNumber}</span> },
             { label: 'Email', value: <A href={`mailto:${legalEntity.email}`}>{legalEntity.email}</A> },
             { label: 'Phone', value: <A href={`tel:${legalEntity.phone.replace(/\s+/g, '')}`}>{legalEntity.phone}</A> },
-            { label: 'Legal notices', value: legalEntity.registeredOffice },
+            { label: 'Location', value: legalEntity.registeredOffice },
           ]}
         />
         <P>
-          We choose our registered office, above, as the address where we will accept service of legal documents.
+          Our full registered office address is on public record with the Companies and Intellectual Property
+          Commission and is available on request. Legal notices may also be sent to us by email.
         </P>
       </>
     ),

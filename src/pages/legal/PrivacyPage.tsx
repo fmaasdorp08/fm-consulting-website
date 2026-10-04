@@ -84,13 +84,14 @@ const sections: LegalSection[] = [
             <>
               <strong>Understanding how the Site performs</strong> — measuring traffic, which content is read and
               which pages lead to enquiries, using Google Analytics. Basis: our legitimate interest in running and
-              improving the Site.
+              improving the Site or, for visitors from the UK, the EEA and Switzerland, your consent.
             </>,
             <>
               <strong>Measuring and improving our advertising</strong> — measuring whether our ads on Facebook and
               Instagram lead to visits and enquiries, and showing our ads to people who have visited the Site, using
-              the Meta Pixel. Basis: our legitimate interest in marketing our own services. You can object at any time
-              (see sections 05 and 08).
+              the Meta Pixel. Basis: our legitimate interest in marketing our own services or, for visitors from the
+              UK, the EEA and Switzerland, your consent. You can object or withdraw consent at any time (see sections
+              05 and 08).
             </>,
             <>
               <strong>Keeping the Site secure and meeting legal obligations</strong> — preventing spam and abuse,
@@ -152,8 +153,8 @@ const sections: LegalSection[] = [
     content: (
       <>
         <P>
-          The Site sets no cookies of its own. The measurement tools we use do, and they load only on our live
-          website:
+          The Site sets no cookies of its own. It remembers your cookie choice, if you make one, in your browser’s
+          local storage. The measurement tools we use do set cookies, and they load only on our live website:
         </P>
         <List
           items={[
@@ -167,9 +168,19 @@ const sections: LegalSection[] = [
             </>,
           ]}
         />
-        <P>You stay in control:</P>
+        <H3 n="5.1">Visitors from the UK, the EEA and Switzerland</H3>
+        <P>
+          If you visit from the United Kingdom, the European Economic Area or Switzerland, analytics and advertising
+          cookies stay off unless you accept them in the cookie notice. Until then, the Meta Pixel does not load and
+          Google Analytics runs in a cookieless mode that sends no cookie identifiers. To decide whether to show the notice,
+          we check the country you are visiting from, as indicated by your IP address. We don’t store your IP
+          address.
+        </P>
+        <H3 n="5.2">Your choices</H3>
         <List
           items={[
+            'Change or withdraw your choice at any time under “Cookie preferences” at the bottom of every page. Declining also records your objection to analytics and advertising cookies under POPIA.',
+            'We honour the Global Privacy Control signal. If your browser sends it, we treat it as declining analytics and advertising cookies.',
             'Block or delete cookies in your browser settings. The Site works without them.',
             <>
               Install Google’s{' '}
@@ -310,7 +321,7 @@ const sections: LegalSection[] = [
               ),
             },
             { label: 'Phone', value: <A href={`tel:${legalEntity.phone.replace(/\s+/g, '')}`}>{legalEntity.phone}</A> },
-            { label: 'Address', value: legalEntity.registeredOffice },
+            { label: 'Location', value: <>{legalEntity.registeredOffice} <span className="text-exvia-black/50">— full address on request</span></> },
           ]}
         />
         <P>

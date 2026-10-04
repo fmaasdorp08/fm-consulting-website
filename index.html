@@ -11,8 +11,14 @@
          the production domain so localhost and Vercel preview traffic stay out
          of the reports. Route changes are tracked by GA4's enhanced measurement
          ("page changes based on browser history events"). Event tracking
-         (CTA, contact, form and newsletter) and the Meta Pixel live in
-         src/lib/analytics.ts. -->
+         (CTA, contact, form and newsletter), the Meta Pixel and the cookie
+         choice live in src/lib/analytics.ts.
+
+         Consent Mode v2: visitors from the UK, the EEA and Switzerland start
+         with every storage type denied (GA sends cookieless pings only) until
+         they accept. Everyone else starts granted. A saved choice or a Global
+         Privacy Control signal overrides both. Keep CONSENT_REGIONS in sync
+         with src/lib/analytics.ts. -->
     <script>
       if (location.hostname === 'www.fmconsultingza.co.za') {
         var s = document.createElement('script');
@@ -21,6 +27,19 @@
         document.head.appendChild(s);
         window.dataLayer = window.dataLayer || [];
         window.gtag = function () { dataLayer.push(arguments); };
+
+        var CONSENT_REGIONS = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'];
+        var denied = { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' };
+        var granted = { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' };
+        gtag('consent', 'default', Object.assign({ region: CONSENT_REGIONS, wait_for_update: 500 }, denied));
+        gtag('consent', 'default', granted);
+        try {
+          var saved = JSON.parse(localStorage.getItem('fm_consent_v1') || 'null');
+          if (navigator.globalPrivacyControl === true) gtag('consent', 'update', denied);
+          else if (saved && saved.choice === 'granted') gtag('consent', 'update', granted);
+          else if (saved && saved.choice === 'denied') gtag('consent', 'update', denied);
+        } catch (e) {}
+
         gtag('js', new Date());
         gtag('config', 'G-Z729V3H6EY');
       }

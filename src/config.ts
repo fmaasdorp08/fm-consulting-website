@@ -18,7 +18,8 @@ export const legalEntity = {
   registrationNumber: '2026/673704/07',
   registeredOn: '24 August 2026',
   jurisdiction: 'South Africa',
-  registeredOffice: '40 Bayview Road, Wynberg, Cape Town, 7800',
+  /** Public-facing location only. The full registered office is on record at the CIPC. */
+  registeredOffice: 'Wynberg, Cape Town',
   informationOfficer: 'Fouad Maasdorp',
   informationOfficerRole: 'Director',
   email: 'fmaasdorp@outlook.com',
@@ -28,9 +29,9 @@ export const legalEntity = {
 
 // One date drives both legal pages' "Effective" and "Last updated" lines.
 export const legalDates = {
-  effective: '3 October 2026',
-  updated: '3 October 2026',
-  iso: '2026-10-03',
+  effective: '4 October 2026',
+  updated: '4 October 2026',
+  iso: '2026-10-04',
 };
 
 export interface SiteConfig {
